@@ -1,4 +1,5 @@
 class QuizQuestionsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_quiz_question, only: %i[ show edit update destroy ]
 
   # GET /quiz_questions or /quiz_questions.json

@@ -13,7 +13,7 @@
 
   <div>
     <%= form.label :kind, style: "display: block" %>
-    <%= form.number_field :kind %>
+    <%= form.select :kind, CardItem.kinds.keys %>
   </div>
 
   <div>
@@ -28,12 +28,12 @@
 
   <div>
     <%= form.label :breakdown_id, style: "display: block" %>
-    <%= form.text_field :breakdown_id %>
+    <%= form.select :breakdown_id, Breakdown.all.collect { |b| [b.title, b.id] }, include_blank: "Выберите разбор" %>
   </div>
 
   <div>
     <%= form.label :source_id, style: "display: block" %>
-    <%= form.text_field :source_id %>
+    <%= form.select :source_id, Source.all.collect { |s| [s.title, s.id] }, include_blank: "Без источника (гипотеза)" %>
   </div>
 
   <div>

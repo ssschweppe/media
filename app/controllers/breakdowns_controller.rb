@@ -1,9 +1,9 @@
 class BreakdownsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_breakdown, only: %i[ show edit update destroy ]
 
   # GET /breakdowns or /breakdowns.json
   def index
-    @breakdowns = Breakdown.all
   end
 
   # GET /breakdowns/1 or /breakdowns/1.json

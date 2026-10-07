@@ -1,4 +1,5 @@
 class PatternsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_pattern, only: %i[ show edit update destroy ]
 
   # GET /patterns or /patterns.json

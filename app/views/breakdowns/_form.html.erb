@@ -38,12 +38,12 @@
 
   <div>
     <%= form.label :pattern_id, style: "display: block" %>
-    <%= form.text_field :pattern_id %>
+    <%= form.select :pattern_id, Pattern.all.collect { |p| [p.title, p.id] }, include_blank: "Выберите паттерн" %>
   </div>
 
   <div>
     <%= form.label :example_id, style: "display: block" %>
-    <%= form.text_field :example_id %>
+    <%= form.select :example_id, Example.all.collect { |e| [e.name, e.id] }, include_blank: "Выберите пример" %>
   </div>
 
   <div>

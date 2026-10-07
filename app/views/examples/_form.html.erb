@@ -13,7 +13,7 @@
 
   <div>
     <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+    <%= form.select :studio_id, Studio.all.collect { |s| [s.name, s.id] }, include_blank: "Без студии" %>
   </div>
 
   <div>

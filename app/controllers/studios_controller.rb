@@ -1,4 +1,5 @@
 class StudiosController < ApplicationController
+  load_and_authorize_resource
   before_action :set_studio, only: %i[ show edit update destroy ]
 
   # GET /studios or /studios.json

@@ -1,4 +1,5 @@
 class ExamplesController < ApplicationController
+  load_and_authorize_resource
   before_action :set_example, only: %i[ show edit update destroy ]
 
   # GET /examples or /examples.json

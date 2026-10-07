@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :quiz_questions
   resources :card_items
   resources :breakdowns
@@ -18,5 +19,5 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  # root "posts#index"
+  root "breakdowns#index"
 end

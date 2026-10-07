@@ -1,4 +1,5 @@
 class SourcesController < ApplicationController
+  load_and_authorize_resource
   before_action :set_source, only: %i[ show edit update destroy ]
 
   # GET /sources or /sources.json
