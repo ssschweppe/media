@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @pattern %>
+
+<div>
+  <%= link_to "Edit this pattern", edit_pattern_path(@pattern) %> |
+  <%= link_to "Back to patterns", patterns_path %>
+
+  <%= button_to "Destroy this pattern", @pattern, method: :delete %>
+</div>

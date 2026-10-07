@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @breakdown %>
+
+<div>
+  <%= link_to "Edit this breakdown", edit_breakdown_path(@breakdown) %> |
+  <%= link_to "Back to breakdowns", breakdowns_path %>
+
+  <%= button_to "Destroy this breakdown", @breakdown, method: :delete %>
+</div>

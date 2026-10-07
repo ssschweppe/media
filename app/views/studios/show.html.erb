@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @studio %>
+
+<div>
+  <%= link_to "Edit this studio", edit_studio_path(@studio) %> |
+  <%= link_to "Back to studios", studios_path %>
+
+  <%= button_to "Destroy this studio", @studio, method: :delete %>
+</div>

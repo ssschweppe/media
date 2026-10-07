@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Breakdowns" %>
+
+<h1>Breakdowns</h1>
+
+<div id="breakdowns">
+  <% @breakdowns.each do |breakdown| %>
+    <%= render breakdown %>
+    <p>
+      <%= link_to "Show this breakdown", breakdown %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New breakdown", new_breakdown_path %>

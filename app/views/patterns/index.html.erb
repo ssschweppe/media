@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Patterns" %>
+
+<h1>Patterns</h1>
+
+<div id="patterns">
+  <% @patterns.each do |pattern| %>
+    <%= render pattern %>
+    <p>
+      <%= link_to "Show this pattern", pattern %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New pattern", new_pattern_path %>

@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  kind: 1
+  text: MyText
+  position: 1
+  breakdown: one
+  source: one
+
+two:
+  kind: 1
+  text: MyText
+  position: 1
+  breakdown: two
+  source: two

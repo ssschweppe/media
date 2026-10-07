@@ -1,0 +1,12 @@
+<% content_for :title, "Editing breakdown" %>
+
+<h1>Editing breakdown</h1>
+
+<%= render "form", breakdown: @breakdown %>
+
+<br>
+
+<div>
+  <%= link_to "Show this breakdown", @breakdown %> |
+  <%= link_to "Back to breakdowns", breakdowns_path %>
+</div>

@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  lead: MyText
+  body: MyText
+  demo_key: MyString
+  published_at: 2026-10-07 01:59:32
+  pattern: one
+  example: one
+
+two:
+  title: MyString
+  lead: MyText
+  body: MyText
+  demo_key: MyString
+  published_at: 2026-10-07 01:59:32
+  pattern: two
+  example: two

@@ -1,0 +1,12 @@
+<% content_for :title, "Editing studio" %>
+
+<h1>Editing studio</h1>
+
+<%= render "form", studio: @studio %>
+
+<br>
+
+<div>
+  <%= link_to "Show this studio", @studio %> |
+  <%= link_to "Back to studios", studios_path %>
+</div>
