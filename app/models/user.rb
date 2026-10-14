@@ -1,6 +1,15 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+  # database_authenticatable: вход по паролю
+  # registerable: регистрация читателей
+  # lockable: пауза после неверных паролей
+  # validatable: проверка формата email и длины пароля
+  devise :database_authenticatable, :registerable, :lockable, :validatable
+
+  ROLES = %w[user admin].freeze
+
+  validates :role, inclusion: { in: ROLES }
+
+  def admin?
+    role == "admin"
+  end
 end
