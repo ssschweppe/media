@@ -67,3 +67,7 @@ end
 
 gem "devise", "~> 5.0"
 gem "cancancan", "~> 3.6"
+
+gem "carrierwave", "~> 3.1"
+
+gem "redcarpet", "~> 3.6"
