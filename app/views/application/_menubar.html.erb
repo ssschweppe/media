@@ -3,6 +3,11 @@
 
   <% if user_signed_in? %>
     <%= current_user.email %>
+
+  <% if user_signed_in? && current_user.admin? %>
+    <%= link_to "Админка", admin_root_path %>
+  <% end %>
+  
     <%= button_to "Выйти", destroy_user_session_path, method: :delete %>
   <% else %>
     <%= link_to "Войти", new_user_session_path %>
