@@ -12,7 +12,8 @@
   <p class="splash-status">Сайт готовится к запуску. Новые разборы выходят в Telegram-канале.</p>
 
   <div class="splash-actions">
-    <%= render "telegram_button" %>
+    <%= link_to "О проекте", about_path, class: "button" %>
+    <%= render "telegram_button", extra_class: "button-secondary" %>
   </div>
 </section>
 
