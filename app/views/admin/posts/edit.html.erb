@@ -1,0 +1,10 @@
+<% content_for :title, "Редактирование поста" %>
+
+<h1>Редактирование поста</h1>
+
+<%= render "form", post: @post %>
+
+<p>
+  <%= link_to "Посмотреть пост", admin_post_path(@post) %> ·
+  <%= link_to "← Все посты", admin_posts_path %>
+</p>

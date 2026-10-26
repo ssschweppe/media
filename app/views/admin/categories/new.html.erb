@@ -1,0 +1,7 @@
+<% content_for :title, "Новая категория" %>
+
+<h1>Новая категория</h1>
+
+<%= render "form", category: @category %>
+
+<p><%= link_to "← Все категории", admin_categories_path %></p>

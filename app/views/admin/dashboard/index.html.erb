@@ -1,2 +1,17 @@
+<% content_for :title, "Дашборд" %>
+
 <h1>Админка</h1>
 <p>Вы вошли как <%= current_user.email %></p>
+
+<ul class="admin-stats">
+  <li><strong><%= @rubrics_count %></strong> <%= link_to "Рубрики", admin_rubrics_path %></li>
+  <li><strong><%= @categories_count %></strong> <%= link_to "Категории", admin_categories_path %></li>
+  <% Post::STATUSES.each do |status, name| %>
+    <li>
+      <strong><%= @posts_by_status.fetch(status, 0) %></strong>
+      Посты: <%= link_to name.downcase, admin_posts_path(status: status) %>
+    </li>
+  <% end %>
+</ul>
+
+<p><%= link_to "Новый пост", new_admin_post_path, class: "button" %></p>

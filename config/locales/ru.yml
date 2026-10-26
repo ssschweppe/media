@@ -28,7 +28,9 @@ ru:
         posts: посты
       post:
         rubric: Рубрика
+        rubric_id: Рубрика
         category: Категория
+        category_id: Категория
         title: Заголовок
         slug: Slug
         lead: Лид

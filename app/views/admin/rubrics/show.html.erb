@@ -1,0 +1,23 @@
+<% content_for :title, @rubric.name %>
+
+<div class="admin-title">
+  <h1>Рубрика «<%= @rubric.name %>»</h1>
+  <div class="admin-actions">
+    <%= link_to "Изменить", edit_admin_rubric_path(@rubric), class: "button" %>
+    <%= button_to "Удалить", admin_rubric_path(@rubric), method: :delete, class: "button-danger",
+                  form: { data: { turbo_confirm: "Удалить рубрику «#{@rubric.name}»?" } } %>
+  </div>
+</div>
+
+<p>
+  Slug: <code><%= @rubric.slug %></code> · Порядок: <%= @rubric.position %>
+</p>
+
+<% if @rubric.description.present? %>
+  <p><%= @rubric.description %></p>
+<% end %>
+
+<h2>Посты в рубрике</h2>
+<%= render "admin/posts_table", posts: @posts %>
+
+<p><%= link_to "← Все рубрики", admin_rubrics_path %></p>

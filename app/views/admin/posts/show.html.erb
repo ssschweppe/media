@@ -1,0 +1,24 @@
+<% content_for :title, @post.title %>
+
+<div class="admin-title">
+  <p>
+    <%= render "admin/post_status", post: @post %>
+    <code class="hint"><%= @post.slug %></code>
+  </p>
+  <div class="admin-actions">
+    <%= link_to "Изменить", edit_admin_post_path(@post), class: "button" %>
+    <%= button_to "Удалить", admin_post_path(@post), method: :delete, class: "button-danger",
+                  form: { data: { turbo_confirm: "Удалить пост «#{@post.title}»?" } } %>
+  </div>
+</div>
+
+<%# Тот же шаблон, что и на сайте: админ видит пост так, как его увидят читатели %>
+<p class="hint">
+  <%= @post.published? ? "Так пост выглядит на сайте:" : "Так пост будет выглядеть после публикации:" %>
+</p>
+
+<div class="admin-preview">
+  <%= render "posts/article", post: @post %>
+</div>
+
+<p><%= link_to "← Все посты", admin_posts_path %></p>

@@ -1,0 +1,27 @@
+<%= form_with model: [ :admin, rubric ], class: "admin-form" do |form| %>
+  <%= render "admin/form_errors", record: rubric %>
+
+  <div class="form-field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="form-field">
+    <%= form.label :slug %>
+    <%= form.text_field :slug %>
+    <p class="hint">Часть адреса: строчная латиница, цифры и дефисы, например <code>goszakaz-pod-lupoj</code></p>
+  </div>
+
+  <div class="form-field">
+    <%= form.label :description %>
+    <%= form.text_area :description, rows: 3 %>
+  </div>
+
+  <div class="form-field">
+    <%= form.label :position %>
+    <%= form.number_field :position %>
+    <p class="hint">Чем меньше число, тем выше рубрика в списках</p>
+  </div>
+
+  <%= form.submit "Сохранить" %>
+<% end %>

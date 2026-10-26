@@ -66,6 +66,15 @@
   max-width: var(--width-text);
 }
 
+/* Предпросмотр поста в админке: рамка, чтобы отделить пост от интерфейса */
+.admin-preview {
+  margin: 1rem 0 2rem;
+  padding: 2rem 1.5rem;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  background: #fff;
+}
+
 .admin-cover {
   max-width: 16rem;
   border-radius: var(--radius);

@@ -1,0 +1,36 @@
+<%# Таблица постов: общий список, а также посты внутри рубрики или категории %>
+<% if posts.any? %>
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th>Заголовок</th>
+        <th>Рубрика</th>
+        <th>Категория</th>
+        <th>Статус</th>
+        <th>Опубликован</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% posts.each do |post| %>
+        <tr>
+          <td>
+            <%= link_to post.title, admin_post_path(post) %><br>
+            <code class="hint"><%= post.slug %></code>
+          </td>
+          <td><%= post.rubric.name %></td>
+          <td><%= post.category&.name || "—" %></td>
+          <td><%= render "admin/post_status", post: post %></td>
+          <td><%= post.published_at ? l(post.published_at) : "—" %></td>
+          <td class="admin-actions">
+            <%= link_to "Изменить", edit_admin_post_path(post) %>
+            <%= button_to "Удалить", admin_post_path(post), method: :delete, class: "button-danger",
+                          form: { data: { turbo_confirm: "Удалить пост «#{post.title}»?" } } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>Постов пока нет.</p>
+<% end %>

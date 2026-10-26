@@ -1,0 +1,7 @@
+<% content_for :title, "Новый пост" %>
+
+<h1>Новый пост</h1>
+
+<%= render "form", post: @post %>
+
+<p><%= link_to "← Все посты", admin_posts_path %></p>

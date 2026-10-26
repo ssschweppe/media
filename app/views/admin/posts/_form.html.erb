@@ -1,0 +1,58 @@
+<%= form_with model: [ :admin, post ], class: "admin-form" do |form| %>
+  <%= render "admin/form_errors", record: post %>
+
+  <div class="form-field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="form-field">
+    <%= form.label :slug %>
+    <%= form.text_field :slug %>
+    <p class="hint">Адрес поста: /posts/<code>slug</code>. Строчная латиница, цифры и дефисы</p>
+  </div>
+
+  <div class="form-field">
+    <%= form.label :lead %>
+    <%= form.text_area :lead, rows: 3 %>
+    <p class="hint">Пара предложений под заголовком, видны и в списке постов</p>
+  </div>
+
+  <div class="form-field">
+    <%= form.label :rubric_id %>
+    <%= form.collection_select :rubric_id, Rubric.ordered, :id, :name, prompt: "Выберите рубрику" %>
+  </div>
+
+  <div class="form-field">
+    <%= form.label :category_id %>
+    <%= form.collection_select :category_id, Category.ordered, :id, :name, include_blank: "Без категории" %>
+  </div>
+
+  <div class="form-field">
+    <%= form.label :cover %>
+    <% if post.cover.present? %>
+      <p><%= image_tag post.cover.url, alt: "", class: "admin-cover" %></p>
+      <p><%= form.check_box :remove_cover %> <%= form.label :remove_cover, class: "inline" %></p>
+    <% end %>
+    <%= form.file_field :cover, accept: "image/jpeg,image/png,image/webp" %>
+    <%= form.hidden_field :cover_cache %>
+    <p class="hint">JPG, PNG или WebP. Картинка сохраняется как есть, без обработки</p>
+  </div>
+
+  <div class="form-field">
+    <%= form.label :status %>
+    <%= form.select :status, Post::STATUSES.invert %>
+    <p class="hint">На сайте видны только опубликованные посты. Дата публикации ставится сама</p>
+  </div>
+
+  <div class="form-field">
+    <%= form.label :body %>
+    <%= form.text_area :body, rows: 20 %>
+    <p class="hint">
+      Markdown: <code>## Подзаголовок</code>, пустая строка между абзацами,
+      <code>**жирный**</code>, <code>- пункт списка</code>, <code>[ссылка](https://…)</code>
+    </p>
+  </div>
+
+  <%= form.submit "Сохранить" %>
+<% end %>

@@ -1,0 +1,37 @@
+<% content_for :title, "Рубрики" %>
+
+<div class="admin-title">
+  <h1>Рубрики</h1>
+  <%= link_to "Новая рубрика", new_admin_rubric_path, class: "button" %>
+</div>
+
+<% if @rubrics.any? %>
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th>Порядок</th>
+        <th>Название</th>
+        <th>Slug</th>
+        <th>Постов</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @rubrics.each do |rubric| %>
+        <tr>
+          <td><%= rubric.position %></td>
+          <td><%= link_to rubric.name, admin_rubric_path(rubric) %></td>
+          <td><code><%= rubric.slug %></code></td>
+          <td><%= rubric.posts.count %></td>
+          <td class="admin-actions">
+            <%= link_to "Изменить", edit_admin_rubric_path(rubric) %>
+            <%= button_to "Удалить", admin_rubric_path(rubric), method: :delete, class: "button-danger",
+                          form: { data: { turbo_confirm: "Удалить рубрику «#{rubric.name}»?" } } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>Рубрик пока нет.</p>
+<% end %>
