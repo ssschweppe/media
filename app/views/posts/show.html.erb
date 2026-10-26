@@ -1,7 +1,33 @@
 <% content_for :title, @post.title %>
 
 <div class="page">
-  <%= render "article", post: @post %>
+  <article class="article">
+    <header class="article-header">
+      <p class="article-meta">
+        <%= @post.rubric.name %>
+        <% if @post.category %>
+          · <%= @post.category.name %>
+        <% end %>
+        <% if @post.published_at %>
+          · <%= time_tag @post.published_at, l(@post.published_at, format: :date) %>
+        <% end %>
+      </p>
+
+      <h1><%= @post.title %></h1>
+
+      <% if @post.lead.present? %>
+        <p class="article-lead"><%= @post.lead %></p>
+      <% end %>
+    </header>
+
+    <% if @post.cover.present? %>
+      <%= image_tag @post.cover.url, alt: "", class: "article-cover" %>
+    <% end %>
+
+    <div class="article-body">
+      <%= markdown(@post.body) %>
+    </div>
+  </article>
 
   <p class="article-back"><%= link_to "← Все разборы", posts_path %></p>
 </div>

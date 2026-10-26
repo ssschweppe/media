@@ -321,7 +321,7 @@
   }
 }
 
-/* Пост целиком (posts/_article) */
+/* Пост целиком (posts/show) */
 .article {
   max-width: var(--width-text);
   margin: 0 auto;

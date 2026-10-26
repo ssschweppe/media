@@ -281,22 +281,21 @@
   font-weight: 600;
 }
 
-/* Предпросмотр поста: внутри рамки пост выглядит так же, как на сайте */
-.admin-preview {
-  margin: 1rem 0 2rem;
-  padding: 2rem 1.5rem;
-  border: 1px solid var(--admin-border);
-  background: var(--color-paper);
-  color: var(--color-ink);
-  font: 1rem/1.6 var(--font-text);
+/* Страница поста: поля таблицей «название — значение» и текст */
+.admin-details {
+  max-width: var(--width-text);
 }
 
-.admin .admin-preview h1,
-.admin .admin-preview h2,
-.admin .admin-preview h3 {
-  font-family: var(--font-heading);
+.admin-details th {
+  width: 8rem;
 }
 
-.admin .admin-preview a {
-  color: var(--color-accent);
+.admin-body {
+  max-width: var(--width-text);
+}
+
+.admin-body h2,
+.admin-body h3 {
+  margin: 1.5rem 0 0.5rem;
+  font-size: 1rem;
 }
