@@ -1,0 +1,86 @@
+# Русские названия полей и сообщения об ошибках.
+# Чего здесь нет (например, сообщений Devise), берётся из английских файлов: см. config.i18n.fallbacks.
+
+ru:
+  activerecord:
+    models:
+      user: Пользователь
+      rubric: Рубрика
+      category: Категория
+      post: Пост
+    attributes:
+      user:
+        email: Email
+        password: Пароль
+        password_confirmation: Подтверждение пароля
+        role: Роль
+      rubric:
+        name: Название
+        slug: Slug
+        description: Описание
+        position: Порядок
+        posts: посты
+      category:
+        name: Название
+        slug: Slug
+        description: Описание
+        position: Порядок
+        posts: посты
+      post:
+        rubric: Рубрика
+        category: Категория
+        title: Заголовок
+        slug: Slug
+        lead: Лид
+        cover: Обложка
+        remove_cover: Удалить обложку
+        body: Текст
+        status: Статус
+        published_at: Дата публикации
+    errors:
+      messages:
+        restrict_dependent_destroy:
+          has_one: "Нельзя удалить: есть связанная запись (%{record})"
+          has_many: "Нельзя удалить: к ней привязаны %{record}. Сначала перенесите или удалите их"
+      models:
+        post:
+          attributes:
+            rubric:
+              required: не выбрана
+
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      blank: не может быть пустым
+      present: должно быть пустым
+      taken: уже занят
+      invalid: имеет неверный формат
+      inclusion: имеет недопустимое значение
+      exclusion: имеет зарезервированное значение
+      required: не указано
+      accepted: нужно подтвердить
+      confirmation: не совпадает с полем «%{attribute}»
+      # Числовое поле пока одно — «Порядок», отсюда мужской род
+      not_a_number: должен быть числом
+      not_an_integer: должен быть целым числом
+      too_short:
+        one: "слишком короткий (минимум %{count} символ)"
+        other: "слишком короткий (минимум %{count} симв.)"
+      too_long:
+        one: "слишком длинный (максимум %{count} символ)"
+        other: "слишком длинный (максимум %{count} симв.)"
+      slug_format: "может содержать только строчную латиницу, цифры и дефисы между словами"
+      # Сообщения CarrierWave
+      extension_allowlist_error: "в формате %{extension} не подходит, можно: %{allowed_types}"
+      content_type_allowlist_error: "с типом %{content_type} не подходит, нужна картинка JPG, PNG или WebP"
+      carrierwave_integrity_error: "не подходит по типу файла"
+      carrierwave_processing_error: "не удалось обработать"
+      carrierwave_download_error: "не удалось скачать"
+
+  date:
+    formats:
+      default: "%d.%m.%Y"
+  time:
+    formats:
+      default: "%d.%m.%Y %H:%M"
+      date: "%d.%m.%Y"

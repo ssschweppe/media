@@ -30,6 +30,9 @@
 
 /public/assets
 
+# Ignore files uploaded through CarrierWave (covers live in public/uploads/post/cover/<id>).
+/public/uploads
+
 # Ignore key files for decrypting credentials and more.
 /config/*.key
 

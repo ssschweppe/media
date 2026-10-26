@@ -21,7 +21,13 @@ module Media
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.time_zone = "Moscow"
+
+    # Интерфейс на русском (config/locales/ru.yml).
+    # Если перевода нет, например у сообщений Devise, берётся английский
+    config.i18n.default_locale = :ru
+    config.i18n.fallbacks = [ :en ]
   end
 end
