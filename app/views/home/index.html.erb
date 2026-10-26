@@ -1,2 +1,29 @@
-<h1>Смета на просвет</h1>
-<p>Здесь будет главная страница медиа.</p>
+<%# Заглушка сайта (splash screen) до запуска %>
+<section class="splash">
+  <p class="splash-kicker">Медиа IT-бюро Терракот</p>
+
+  <h1 class="splash-title">Смета на&nbsp;просвет</h1>
+
+  <p class="splash-text">
+    Медиа о том, из чего складывается цена сайтов и приложений.
+    Разбираем сметы, показываем расчёт и говорим, что в них можно не делать.
+  </p>
+
+  <p class="splash-status">Сайт готовится к запуску. Новые разборы выходят в Telegram-канале.</p>
+
+  <div class="splash-actions">
+    <%= render "telegram_button" %>
+  </div>
+</section>
+
+<% if @posts.any? %>
+  <section class="splash-posts">
+    <h2>Уже вышло</h2>
+
+    <div class="post-list">
+      <%= render partial: "posts/card", collection: @posts, as: :post %>
+    </div>
+
+    <p><%= link_to "Все разборы →", posts_path %></p>
+  </section>
+<% end %>

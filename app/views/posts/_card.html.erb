@@ -1,0 +1,21 @@
+<%# Карточка поста в списке %>
+<article class="post-card">
+  <% if post.cover.present? %>
+    <%= link_to post_path(post.slug), tabindex: -1 do %>
+      <%= image_tag post.cover.url, alt: "", class: "post-card-cover" %>
+    <% end %>
+  <% end %>
+
+  <p class="article-meta">
+    <%= post.rubric.name %>
+    <% if post.category %>
+      · <%= post.category.name %>
+    <% end %>
+  </p>
+
+  <h2 class="post-card-title"><%= link_to post.title, post_path(post.slug) %></h2>
+
+  <% if post.lead.present? %>
+    <p><%= post.lead %></p>
+  <% end %>
+</article>

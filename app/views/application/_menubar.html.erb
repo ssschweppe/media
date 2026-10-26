@@ -1,16 +1,22 @@
-<div>
-  <%= link_to "Главная", root_path %>
+<header class="site-header">
+  <%= link_to "Смета на просвет", root_path, class: "site-logo" %>
 
-  <% if user_signed_in? %>
-    <%= current_user.email %>
+  <nav class="site-nav">
+    <%= link_to "Разборы", posts_path %>
+  </nav>
 
-  <% if user_signed_in? && current_user.admin? %>
-    <%= link_to "Админка", admin_root_path %>
-  <% end %>
-  
-    <%= button_to "Выйти", destroy_user_session_path, method: :delete %>
-  <% else %>
-    <%= link_to "Войти", new_user_session_path %>
-    <%= link_to "Регистрация", new_user_registration_path %>
-  <% end %>
-</div>
+  <div class="site-user">
+    <% if user_signed_in? %>
+      <span><%= current_user.email %></span>
+
+      <% if current_user.admin? %>
+        <%= link_to "Админка", admin_root_path %>
+      <% end %>
+
+      <%= button_to "Выйти", destroy_user_session_path, method: :delete, class: "button-secondary" %>
+    <% else %>
+      <%= link_to "Войти", new_user_session_path %>
+      <%= link_to "Регистрация", new_user_registration_path %>
+    <% end %>
+  </div>
+</header>

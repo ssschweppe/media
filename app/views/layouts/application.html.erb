@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
   <head>
-    <title><%= content_for(:title) || "Media" %></title>
+    <title><%= [ content_for(:title), "Смета на просвет" ].compact.join(" · ") %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Media">
+    <meta name="application-name" content="Смета на просвет">
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -24,8 +24,11 @@
   </head>
 
   <body>
-  <%= render "menubar" %>
-  <%= render "flash" %>
-    <%= yield %>
+    <%= render "menubar" %>
+
+    <main class="site-main">
+      <%= render "flash" %>
+      <%= yield %>
+    </main>
   </body>
 </html>

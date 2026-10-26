@@ -1,0 +1,13 @@
+<% content_for :title, "Разборы" %>
+
+<section class="page">
+  <h1>Разборы</h1>
+
+  <% if @posts.any? %>
+    <div class="post-list">
+      <%= render partial: "posts/card", collection: @posts, as: :post %>
+    </div>
+  <% else %>
+    <p>Первые разборы скоро появятся.</p>
+  <% end %>
+</section>

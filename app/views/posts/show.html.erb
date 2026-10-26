@@ -1,0 +1,7 @@
+<% content_for :title, @post.title %>
+
+<div class="page">
+  <%= render "article", post: @post %>
+
+  <p class="article-back"><%= link_to "← Все разборы", posts_path %></p>
+</div>

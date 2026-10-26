@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   devise_for :users
   root "home#index"
 
+  # Публичная часть: только опубликованные посты, адрес по slug — /posts/<slug>
+  resources :posts, only: %i[ index show ], param: :slug
+
   # Админка: все посты и CRUD, доступ только у администратора (Admin::BaseController)
   namespace :admin do
     root "dashboard#index"
