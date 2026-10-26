@@ -12,31 +12,13 @@ SEEDS_DIR = Rails.root.join("db/seeds")
 COVERS_DIR = Rails.root.join("public/autoupload/post_covers")
 
 def seed
-  check_before_seed
   clean_uploads_folder
-
-  # Если что-то пойдёт не так (например, нет текста поста), база останется пустой
-  ActiveRecord::Base.transaction do
-    create_admin
-    create_rubrics
-    create_categories
-    create_posts
-  end
+  create_admin
+  create_rubrics
+  create_categories
+  create_posts
 end
 
-# Проверяем всё до того, как что-то менять.
-# Записи создаются через create!, поэтому сиды запускаются только на пустой базе
-def check_before_seed
-  if User.exists? || Rubric.exists? || Category.exists? || Post.exists?
-    raise "База не пустая. Чтобы заполнить её с нуля, запустите: ADMIN_PASSWORD=... bin/rails db:reset"
-  end
-
-  if ENV["ADMIN_PASSWORD"].blank?
-    raise "Не задан пароль администратора. Запустите: ADMIN_PASSWORD=... bin/rails db:reset"
-  end
-end
-
-# Обложки старых постов больше не нужны: база создаётся заново
 def clean_uploads_folder
   FileUtils.rm_rf(Rails.root.join("public/uploads"))
   puts "Uploads folder just cleaned"
@@ -44,11 +26,7 @@ end
 
 # Пароль только из переменной окружения, в коде его нет
 def create_admin
-  user = User.create!(
-    email: ENV.fetch("ADMIN_EMAIL", "admin@example.com"),
-    password: ENV.fetch("ADMIN_PASSWORD"),
-    role: "admin"
-  )
+  user = User.create!(email: "admin@example.com", password: ENV.fetch("ADMIN_PASSWORD"), role: "admin")
   puts "User with id #{user.id} just created"
 end
 
@@ -77,7 +55,7 @@ def create_posts
       status: data["status"],
       published_at: data["published_at"],
       body: read_post_body(data["slug"]),
-      cover: data["cover"] && open_cover(data["cover"])
+      cover: data["cover"] && File.open(COVERS_DIR.join(data["cover"]))
     )
     puts "Post with id #{post.id} just created"
   end
@@ -93,13 +71,6 @@ def read_post_body(slug)
   raise "Нет текста для поста «#{slug}»: создайте файл db/seeds/posts/#{slug}.md" unless path.exist?
 
   path.read
-end
-
-def open_cover(file_name)
-  path = COVERS_DIR.join(file_name)
-  raise "Нет картинки для обложки: public/autoupload/post_covers/#{file_name}" unless path.exist?
-
-  File.open(path)
 end
 
 seed
