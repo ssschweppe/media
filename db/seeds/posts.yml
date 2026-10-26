@@ -1,0 +1,54 @@
+# Демонстрационные посты.
+# Текст каждого поста — в db/seeds/posts/<slug>.md, обложка (cover) — файл из public/autoupload/post_covers.
+# rubric и category — slug рубрики и категории; category и cover можно не указывать.
+# status: draft, published или archived. Строки с «: » и даты берём в кавычки.
+
+# Черновик: кнопка «Попробовать разбор» на странице «О проекте» появится, когда его опубликуют
+- title: "Что бы мы выкинули: сайт строительной компании"
+  slug: stroitelnaya-kompaniya
+  rubric: chto-by-my-vykinuli
+  category: sajt-organizacii
+  lead: "Вычеркните из техзадания то, что кажется лишним, и сравните свой выбор с решением редакции."
+  cover: terracotta.png
+  status: draft
+
+- title: "Интернет-магазин мебели: что было в первой смете"
+  slug: magazin-mebeli
+  rubric: kejsy
+  category: internet-magazin
+  lead: "Владелец небольшой мебельной мастерской получил две сметы с разницей в два раза. Разбираем, из чего сложилась разница."
+  cover: sand.png
+  status: published
+  published_at: "2026-10-20 10:00"
+
+- title: "Сайт музея по госзаказу: что вошло в техзадание"
+  slug: sajt-muzeya
+  rubric: goszakaz-pod-lupoj
+  category: sajt-organizacii
+  lead: "Читаем техзадание на сайт небольшого музея и отмечаем, какие пункты встречаются почти везде, а какие редко."
+  cover: slate.png
+  status: published
+  published_at: "2026-10-22 10:00"
+
+- title: "Где найти техзадание на сайт в госзакупках"
+  slug: gde-najti-tehzadanie
+  rubric: goszakaz-pod-lupoj
+  lead: "Короткая инструкция: как искать закупки на разработку сайтов и что смотреть в документах."
+  status: published
+  published_at: "2026-10-24 10:00"
+
+- title: "Приложение для доставки: почему смета выросла вдвое"
+  slug: prilozhenie-dostavki
+  rubric: kejsy
+  category: mobilnoe-prilozhenie
+  lead: "Сначала заказчик хотел приложение «как у всех», потом выяснилось, что половина функций нужна только курьерам."
+  cover: olive.png
+  status: draft
+
+- title: "CRM для сервисного центра: какие модули отложили"
+  slug: crm-servisnogo-centra
+  rubric: kejsy
+  category: vnutrennij-instrument
+  lead: "Старый разбор, снят с публикации: данные устарели."
+  status: archived
+  published_at: "2026-09-15 10:00"

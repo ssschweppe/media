@@ -1,0 +1,26 @@
+# Категории — тип продукта, о котором пост.
+
+- name: "Сайт организации"
+  slug: sajt-organizacii
+  description: "Сайт компании, учреждения или некоммерческой организации."
+  position: 1
+
+- name: "Интернет-магазин"
+  slug: internet-magazin
+  description: "Каталог, корзина, оплата и доставка."
+  position: 2
+
+- name: "Мобильное приложение"
+  slug: mobilnoe-prilozhenie
+  description: "Приложения для iOS и Android."
+  position: 3
+
+- name: "Внутренний инструмент"
+  slug: vnutrennij-instrument
+  description: "CRM, кабинеты сотрудников, учётные системы."
+  position: 4
+
+- name: "Другое"
+  slug: drugoe
+  description: "Всё, что не подходит под остальные категории."
+  position: 5
