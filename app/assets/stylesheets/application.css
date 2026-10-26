@@ -1,10 +1,157 @@
 /*
- * This is a manifest file that'll be compiled into application.css.
- *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
- *
- * Consider organizing styles into separate files for maintainability.
+ * Общие стили сайта и админки.
+ * Цвета, шрифты и ширины вынесены в переменные, чтобы потом натянуть дизайн из Figma.
+ * Propshaft подключает все файлы из app/assets/stylesheets: стили админки лежат в admin.css,
+ * стили публичных страниц — в site.css.
  */
+
+:root {
+  --color-paper: #fbf8f2;
+  --color-ink: #1f1d1a;
+  --color-muted: #6b655c;
+  --color-line: #e4ddd0;
+  --color-accent: #c4562f; /* терракотовый */
+  --color-accent-ink: #ffffff;
+  --color-notice: #2f6f45;
+  --color-notice-bg: #e5f1e8;
+  --color-alert: #a8261c;
+  --color-alert-bg: #fbe8e5;
+  --color-placeholder: #ffe27a;
+
+  --font-text: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-heading: Georgia, "Times New Roman", serif;
+
+  --width-text: 44rem;
+  --width-page: 72rem;
+  --radius: 6px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font: 1rem/1.6 var(--font-text);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  line-height: 1.2;
+}
+
+a {
+  color: var(--color-accent);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Кнопки: ссылки с классом .button, submit в формах и button_to */
+.button,
+button,
+input[type="submit"] {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius);
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button-secondary {
+  background: transparent;
+  color: var(--color-accent);
+}
+
+.button-danger {
+  border-color: var(--color-alert);
+  background: transparent;
+  color: var(--color-alert);
+}
+
+/* button_to оборачивает кнопку в форму, пусть она стоит в строку */
+form.button_to {
+  display: inline;
+}
+
+/* Сообщения notice и alert */
+.flash {
+  margin: 1rem 0;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+}
+
+.flash-notice {
+  background: var(--color-notice-bg);
+  color: var(--color-notice);
+}
+
+.flash-alert {
+  background: var(--color-alert-bg);
+  color: var(--color-alert);
+}
+
+/* Значение, которое ещё не известно: {telegram}, {почта} и т. п. */
+.placeholder {
+  padding: 0 0.25em;
+  background: var(--color-placeholder);
+  color: var(--color-ink);
+  font-family: ui-monospace, monospace;
+}
+
+/* Формы */
+.form-field {
+  margin-bottom: 1.25rem;
+}
+
+.form-field label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}
+
+.form-field input[type="text"],
+.form-field input[type="email"],
+.form-field input[type="number"],
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  background: #fff;
+  font: inherit;
+}
+
+.form-field textarea {
+  font-family: ui-monospace, monospace;
+}
+
+.form-errors {
+  margin-bottom: 1.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  background: var(--color-alert-bg);
+  color: var(--color-alert);
+}
+
+.form-errors ul {
+  margin: 0.5rem 0 0;
+}
+
+.hint {
+  color: var(--color-muted);
+  font-size: 0.875rem;
+}

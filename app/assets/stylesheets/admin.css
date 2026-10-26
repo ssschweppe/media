@@ -1,0 +1,116 @@
+/* Стили админки: всё внутри body.admin, на публичные страницы не влияет */
+
+.admin-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background: var(--color-ink);
+  color: #fff;
+}
+
+.admin-header a {
+  color: #fff;
+}
+
+.admin-nav,
+.admin-user {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
+.admin-user .button-secondary {
+  border-color: #fff;
+  color: #fff;
+}
+
+.admin-main {
+  max-width: var(--width-page);
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.admin-title {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--color-line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.admin-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.admin-form {
+  max-width: var(--width-text);
+}
+
+.admin-cover {
+  max-width: 16rem;
+  border-radius: var(--radius);
+}
+
+/* Статусы постов */
+.status {
+  display: inline-block;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.status-draft {
+  background: #ecebe8;
+  color: var(--color-muted);
+}
+
+.status-published {
+  background: var(--color-notice-bg);
+  color: var(--color-notice);
+}
+
+.status-archived {
+  background: #f3e6d2;
+  color: #7a5520;
+}
+
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  gap: 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.admin-stats li {
+  padding: 1rem;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  background: #fff;
+}
+
+.admin-stats strong {
+  display: block;
+  font-size: 2rem;
+}

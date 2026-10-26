@@ -1,0 +1,12 @@
+<%# Меню админки. Не называть menubar: Rails найдёт публичный application/_menubar %>
+<header class="admin-header">
+  <nav class="admin-nav">
+    <%= link_to "Дашборд", admin_root_path %>
+  </nav>
+
+  <div class="admin-user">
+    <%= link_to "На сайт", root_path %>
+    <span><%= current_user.email %></span>
+    <%= button_to "Выйти", destroy_user_session_path, method: :delete, class: "button-secondary" %>
+  </div>
+</header>
