@@ -4,7 +4,7 @@
   <h1>Рубрика «<%= @rubric.name %>»</h1>
   <div class="admin-actions">
     <%= link_to "Изменить", edit_admin_rubric_path(@rubric), class: "button" %>
-    <%= button_to "Удалить", admin_rubric_path(@rubric), method: :delete, class: "button-danger",
+    <%= button_to "Удалить", admin_rubric_path(@rubric), method: :delete, class: "link-button link-danger",
                   form: { data: { turbo_confirm: "Удалить рубрику «#{@rubric.name}»?" } } %>
   </div>
 </div>

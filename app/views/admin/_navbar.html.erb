@@ -1,15 +1,15 @@
 <%# Меню админки. Не называть menubar: Rails найдёт публичный application/_menubar %>
 <header class="admin-header">
   <nav class="admin-nav">
-    <%= link_to "Дашборд", admin_root_path %>
-    <%= link_to "Рубрики", admin_rubrics_path %>
-    <%= link_to "Категории", admin_categories_path %>
-    <%= link_to "Посты", admin_posts_path %>
+    <%= link_to "Дашборд", admin_root_path, class: ("active" if controller_name == "dashboard") %>
+    <%= link_to "Рубрики", admin_rubrics_path, class: ("active" if controller_name == "rubrics") %>
+    <%= link_to "Категории", admin_categories_path, class: ("active" if controller_name == "categories") %>
+    <%= link_to "Посты", admin_posts_path, class: ("active" if controller_name == "posts") %>
   </nav>
 
   <div class="admin-user">
     <%= link_to "На сайт", root_path %>
     <span><%= current_user.email %></span>
-    <%= button_to "Выйти", destroy_user_session_path, method: :delete, class: "button-secondary" %>
+    <%= button_to "Выйти", destroy_user_session_path, method: :delete, class: "link-button" %>
   </div>
 </header>

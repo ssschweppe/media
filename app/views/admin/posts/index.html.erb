@@ -6,7 +6,7 @@
 </div>
 
 <%# Фильтр по статусу: ?status=draft и т. д. %>
-<nav class="admin-actions">
+<nav class="admin-filter">
   <%= link_to_unless params[:status].blank?, "Все", admin_posts_path %>
   <% Post::STATUSES.each do |status, name| %>
     · <%= link_to_unless params[:status] == status, name, admin_posts_path(status: status) %>

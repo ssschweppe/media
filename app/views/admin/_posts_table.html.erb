@@ -24,7 +24,7 @@
           <td><%= post.published_at ? l(post.published_at) : "—" %></td>
           <td class="admin-actions">
             <%= link_to "Изменить", edit_admin_post_path(post) %>
-            <%= button_to "Удалить", admin_post_path(post), method: :delete, class: "button-danger",
+            <%= button_to "Удалить", admin_post_path(post), method: :delete, class: "link-button link-danger",
                           form: { data: { turbo_confirm: "Удалить пост «#{post.title}»?" } } %>
           </td>
         </tr>

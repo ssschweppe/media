@@ -25,7 +25,7 @@
           <td><%= rubric.posts.count %></td>
           <td class="admin-actions">
             <%= link_to "Изменить", edit_admin_rubric_path(rubric) %>
-            <%= button_to "Удалить", admin_rubric_path(rubric), method: :delete, class: "button-danger",
+            <%= button_to "Удалить", admin_rubric_path(rubric), method: :delete, class: "link-button link-danger",
                           form: { data: { turbo_confirm: "Удалить рубрику «#{rubric.name}»?" } } %>
           </td>
         </tr>

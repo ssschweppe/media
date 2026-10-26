@@ -4,7 +4,7 @@
   <h1>Категория «<%= @category.name %>»</h1>
   <div class="admin-actions">
     <%= link_to "Изменить", edit_admin_category_path(@category), class: "button" %>
-    <%= button_to "Удалить", admin_category_path(@category), method: :delete, class: "button-danger",
+    <%= button_to "Удалить", admin_category_path(@category), method: :delete, class: "link-button link-danger",
                   form: { data: { turbo_confirm: "Удалить категорию «#{@category.name}»?" } } %>
   </div>
 </div>

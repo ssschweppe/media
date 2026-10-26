@@ -75,12 +75,6 @@ input[type="submit"] {
   color: var(--color-accent);
 }
 
-.button-danger {
-  border-color: var(--color-alert);
-  background: transparent;
-  color: var(--color-alert);
-}
-
 /* button_to оборачивает кнопку в форму, пусть она стоит в строку */
 form.button_to {
   display: inline;
@@ -133,10 +127,6 @@ form.button_to {
   border-radius: var(--radius);
   background: #fff;
   font: inherit;
-}
-
-.form-field textarea {
-  font-family: ui-monospace, monospace;
 }
 
 .form-field label.inline {
