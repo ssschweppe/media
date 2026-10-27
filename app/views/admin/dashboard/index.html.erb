@@ -12,6 +12,7 @@
       Посты: <%= link_to name.downcase, admin_posts_path(status: status) %>
     </li>
   <% end %>
+  <li><strong><%= @subscribers_count %></strong> <%= link_to "Подписчики", admin_subscribers_path %></li>
 </ul>
 
 <p><%= link_to "Новый пост", new_admin_post_path, class: "button" %></p>

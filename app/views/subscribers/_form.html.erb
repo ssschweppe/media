@@ -1,0 +1,32 @@
+<%# Поле подписки — компонент EmailInput из макета.
+    Кнопка серая, пока нет почты и галочки согласия (subscribe_controller.js).
+    После отправки поле остаётся с адресом, а ниже появляется «Спасибо за подписку!» %>
+<% sent = local_assigns.fetch(:sent, false) %>
+<%= form_with model: subscriber, url: subscribers_path, id: "subscribe-#{placement}",
+      class: class_names("email-input", "email-input--compact": placement == "splash", "is-sent": sent),
+      data: { controller: "subscribe", subscribe_sent_value: sent } do |form| %>
+  <%= hidden_field_tag :placement, placement, id: nil %>
+
+  <div class="email-input__field">
+    <%= form.email_field :email, id: "subscriber_email_#{placement}", placeholder: "Подписаться на рассылку",
+          required: true, autocomplete: "email", readonly: sent, aria: { label: "Электронная почта" },
+          data: { subscribe_target: "email", action: "input->subscribe#toggle" } %>
+    <button type="submit" class="email-input__send" aria-label="Подписаться" disabled data-subscribe-target="submit">
+      <svg viewBox="0 0 25 25" fill="none" aria-hidden="true">
+        <path d="M4.96647 11.9958L1.2998 23.4541L23.2998 11.9958L1.2998 1.4541L4.96647 11.9958ZM23.2998 11.9958H13.6748H4.96647" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+    </button>
+  </div>
+
+  <label class="email-input__consent">
+    <%= form.check_box :consent, id: "subscriber_consent_#{placement}", required: true, disabled: sent,
+          data: { subscribe_target: "consent", action: "change->subscribe#toggle" } %>
+    <span>Соглашаюсь на <%= link_to "обработку персональных данных", consent_document_path, target: "_blank", rel: "noopener" %></span>
+  </label>
+
+  <% if sent %>
+    <p class="email-input__status">Спасибо за подписку!</p>
+  <% elsif subscriber.errors.any? %>
+    <p class="email-input__status"><%= subscriber.errors.full_messages.first %></p>
+  <% end %>
+<% end %>

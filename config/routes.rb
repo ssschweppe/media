@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   root "home#index"
   get "about", to: "pages#about"
 
+  # Подписка на рассылку с заглушки и из футера
+  resources :subscribers, only: :create
+
   # Публичная часть: только опубликованные посты, адрес по slug — /posts/<slug>
   resources :posts, only: %i[ index show ], param: :slug
 
@@ -12,6 +15,7 @@ Rails.application.routes.draw do
     resources :rubrics
     resources :categories
     resources :posts
+    resources :subscribers, only: %i[ index destroy ]
   end
 
   get "up" => "rails/health#show", as: :rails_health_check

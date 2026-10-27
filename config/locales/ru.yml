@@ -8,7 +8,11 @@ ru:
       rubric: Рубрика
       category: Категория
       post: Пост
+      subscriber: Подписчик
     attributes:
+      subscriber:
+        email: Почта
+        consent: Согласие на обработку персональных данных
       user:
         email: Email
         password: Пароль
