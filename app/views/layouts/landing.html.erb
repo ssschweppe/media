@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title><%= [ content_for(:title), "терракот" ].compact.join(" · ") %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Медиа-сервис о том, из чего складывается стоимость разработки сайтов и приложений">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Manrope:wght@400;500;600&display=swap">
+
+    <%# Заглушка и «О проекте» свёрстаны по макетам из Figma, им нужны только свои стили %>
+    <%= stylesheet_link_tag "landing", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="landing">
+    <%= render "flash" %>
+    <%= yield %>
+  </body>
+</html>

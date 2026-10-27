@@ -1,0 +1,36 @@
+<%# Футер «О проекте». На мобильном (по макету) нет колонки со ссылками %>
+<footer class="footer">
+  <div class="footer__grid l-container">
+    <p class="t-label footer__label">■ Контакты</p>
+
+    <%= link_to root_path, class: "logo-link footer__logo", aria: { label: "терракот — на главную" } do %>
+      <%= render "landing/logo", modifier: "logo--nav" %>
+    <% end %>
+
+    <%# ScrollOnTop: якорь #top прокручивает к началу страницы, плавность задаёт scroll-behavior %>
+    <a class="scroll-top footer__top" href="#top" aria-label="Наверх">
+      <svg viewBox="0 0 26 25" fill="none" aria-hidden="true">
+        <path d="M24.0416 12.3135L12.7279 0.999768L1.41418 12.3135M12.7279 0.999768V23.6272" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
+      </svg>
+    </a>
+
+    <p class="footer__slogan">Пишем о стоимости в IT<br> просто и с душой</p>
+
+    <div class="footer__subscribe">
+      <%# Ссылка на канал ещё не известна %>
+      <a class="footer__telegram" href="#">telegram</a>
+      <%= render "subscribers/form", subscriber: Subscriber.new, placement: "footer" %>
+    </div>
+
+    <div class="footer__links">
+      <%= link_to about_path, class: "footer__about" do %>
+        О проекте <%= render "landing/arrow" %>
+      <% end %>
+      <div class="footer__docs">
+        <%= link_to "Согласие на обработку персональных данных", consent_document_path, target: "_blank", rel: "noopener" %>
+        <%# Документа пока нет, поэтому это не ссылка %>
+        <span>Политика конфиденциальности</span>
+      </div>
+    </div>
+  </div>
+</footer>

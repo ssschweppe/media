@@ -1,159 +1,217 @@
 <% content_for :title, "О проекте" %>
 
-<%# Страница «О проекте». Значения в фигурных скобках ещё не известны и подсвечены (.placeholder) %>
-<div class="about">
-  <section class="about-hero">
-    <h1>Смета на&nbsp;просвет</h1>
-    <p class="about-subtitle">
-      Медиа о том, из чего складывается цена сайтов и приложений.
-      Разбираем сметы, показываем расчёт и говорим, что в них можно не делать.
-    </p>
+<%# Страница «О проекте». Макеты: about/desktop и about/mobile в Figma.
+    Где мобильный текст отличается от десктопного, нужный вариант показывают классы only-d / only-m %>
+<header class="about-nav l-container">
+  <%= link_to root_path, class: "logo-link", aria: { label: "терракот — на главную" } do %>
+    <%= render "landing/logo", modifier: "logo--nav" %>
+  <% end %>
+  <%= link_to about_path, class: "nav-link", aria: { current: "page" } do %>
+    О проекте <%= render "landing/arrow" %>
+  <% end %>
+</header>
 
-    <% if @demo_post %>
-      <div class="about-cta">
-        <%= link_to "Попробовать разбор", post_path(@demo_post.slug), class: "button" %>
-        <p class="hint">5–7 минут · без регистрации</p>
-      </div>
-    <% end %>
+<main class="l-container">
+  <section class="about-hero">
+    <picture class="about-hero__art">
+      <source media="(min-width: 1024px)" srcset="<%= asset_path("about-hero.svg") %>">
+      <%= image_tag "about-hero-mobile.svg", alt: "", width: 345, height: 250 %>
+    </picture>
+
+    <div class="about-hero__body">
+      <h1 class="about-hero__title">
+        Расскажем, из чего складывается <span class="t-accent">цена сайтов и приложений</span>
+      </h1>
+
+      <nav class="about-anchors" aria-label="Разделы страницы">
+        <a href="#why-hard">Почему смету трудно проверить <%= render "landing/arrow" %></a>
+        <a href="#how-we-count">Как мы считаем <%= render "landing/arrow" %></a>
+        <a href="#data">На чём основаны цифры <%= render "landing/arrow" %></a>
+        <a href="#who">Кто делает <%= render "landing/arrow" %></a>
+      </nav>
+    </div>
   </section>
 
-  <section class="about-section about-problem">
-    <div class="about-problem-text">
-      <h2>Почему смету трудно проверить</h2>
-      <p>
-        Студия присылает итоговую сумму, но редко показывает, из чего она собрана.
-        Без технической подготовки непонятно, какие пункты нужны сейчас, какие можно отложить,
-        а на каких опасно экономить.
-      </p>
-      <p>
-        В итоге заказчик либо переплачивает за функции, которые ему не понадобятся,
-        либо экономит на незаметном, например на резервных копиях и защите, и платит потом.
+  <section id="why-hard" class="about-section why-hard">
+    <div class="why-hard__intro">
+      <div class="why-hard__heading">
+        <p class="t-label">■ Почему смету трудно проверить</p>
+        <h2 class="t-h2">Одна цифра вместо состава работ</h2>
+      </div>
+      <p class="t-body why-hard__text">
+        Без технической подготовки непонятно, что нужно сейчас, что можно отложить, а на чём опасно экономить
       </p>
     </div>
 
-    <%# Лист сметы: видно только итог. При наведении (на телефоне — по нажатию) лист светлеет
-        и проступают строки. Работает на :hover и :focus, без JavaScript %>
-    <figure class="sheet-figure">
-      <div class="sheet" tabindex="0" aria-label="Смета, в которой видна только итоговая сумма">
-        <ul class="sheet-lines">
-          <li>Главная страница</li>
-          <li>Личный кабинет</li>
-          <li>Чат-бот</li>
-          <li>Английская версия</li>
-          <li>…</li>
-          <li class="sheet-missing" aria-label="Резервные копии: не указано">не указано</li>
-          <li class="sheet-missing" aria-label="Защита: не указано">не указано</li>
+    <div class="why-hard__cards">
+      <% [
+           [ "overpay", "Переплата<br>за лишнее", "Функции, которые не понадобятся, уже включены в счёт" ],
+           [ "hidden-savings", "Экономия<br>на незаметном", "Без резервных копий и защиты сейчас — дорогой ремонт потом" ],
+           [ "no-breakdown", "Сумма<br>без расшифровки", "Видна только итоговая цифра — не с чем согласиться и не о чем спорить" ]
+         ].each do |name, title, text| %>
+        <article class="card">
+          <picture class="card__art">
+            <source media="(min-width: 768px)" srcset="<%= asset_path("card-#{name}.svg") %>">
+            <%= image_tag "card-#{name}-mobile.svg", alt: "", width: 112, height: 128 %>
+          </picture>
+          <div class="card__body">
+            <h3 class="card__title"><%= title.html_safe %></h3>
+            <p class="card__text"><%= text %></p>
+          </div>
+        </article>
+      <% end %>
+    </div>
+  </section>
+
+  <section id="how-we-count" class="about-section how">
+    <div class="about-row">
+      <p class="t-label">■ Как мы считаем</p>
+      <h2 class="t-h2">
+        Любую сумму можно <span class="t-accent">разложить на части</span><br class="br-xl">
+        и показать, как она получена
+      </h2>
+    </div>
+
+    <p class="formula" aria-label="Смета = часы × ставка + резерв + хостинг на год">
+      <span class="formula__term formula__term--accent">смета</span>
+      <span class="formula__op">=</span>
+      <span class="formula__term">часы</span>
+      <span class="formula__op">×</span>
+      <span class="formula__term">ставка</span>
+      <span class="formula__op">+</span>
+      <span class="formula__term">резерв</span>
+      <span class="formula__op">+</span>
+      <span class="formula__term">хостинг на год</span>
+    </p>
+
+    <div class="about-row">
+      <p class="t-label only-d">■ По шагам</p>
+      <ol class="steps">
+        <li class="step">
+          <div class="step__head"><span>1.</span><span>Функции</span></div>
+          <p class="step__text">
+            Смета складывается из функций, а не из числа страниц.<br class="br-xl">
+            Каждой даём размер — от простого блока до личного кабинета
+          </p>
+        </li>
+        <li class="step">
+          <div class="step__head"><span>2.</span><span>Часы</span></div>
+          <p class="step__text">Каждому размеру соответствует диапазон часов работы</p>
+        </li>
+        <li class="step">
+          <div class="step__head"><span>3.</span><span>Ставка</span></div>
+          <p class="step__text">
+            Часы умножаем на ставку разработчика, которую берем<br class="br-xl">
+            из открытых данных<br class="only-m"> о зарплатах и ценах фрилансеров
+          </p>
+        </li>
+        <li class="step">
+          <div class="step__head"><span>4.</span><span>Резерв и хостинг</span></div>
+          <p class="step__text">
+            Добавляем резерв на непредвиденное и стоимость хостинга<br class="br-xl">
+            с доменом на год
+          </p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="data" class="about-section data">
+    <div class="data__aside">
+      <p class="t-label data__label">■ На чём основаны цифры</p>
+      <div class="data__matrix">
+        <picture>
+          <source media="(min-width: 1024px)" srcset="<%= asset_path("feature-matrix.svg") %>">
+          <%= image_tag "feature-matrix-mobile.svg", alt: "", width: 345, height: 190 %>
+        </picture>
+        <ul class="data__legend t-label">
+          <li>● Есть почти в каждом сайте</li>
+          <li><span class="t-accent">●</span> Встречаются редко и стоят дорого</li>
+          <li class="t-gray">○ Нет в договоре</li>
         </ul>
-        <p class="sheet-total"><span>Итого:</span> <span>1 240 000 ₽</span></p>
       </div>
-      <figcaption class="hint">
-        <span class="sheet-hint-hover">Наведите, чтобы посмотреть на просвет</span>
-        <span class="sheet-hint-touch">Нажмите, чтобы посмотреть на просвет</span>
-      </figcaption>
-    </figure>
+    </div>
 
-    <ul class="about-facts">
-      <li>Резервные копии прописаны в 4 из 9 техзаданий</li>
-      <li>Мониторинг доступности — ни в одном</li>
-      <li>Часов работы по функциям нет ни в одном документе, только итоговые суммы</li>
-    </ul>
+    <div class="data__content">
+      <h2 class="t-h2 data__title">
+        Мы изучили <span class="t-accent">34 техзаданий и договоров</span> на сайты
+      </h2>
+
+      <div class="facts">
+        <div class="fact">
+          <p class="t-label"><span class="only-m">■ </span>Источники</p>
+          <p class="t-body">Госзакупки, договоры компаний<br class="br-xl"> и образцы из открытых статей</p>
+        </div>
+        <div class="fact">
+          <p class="t-label"><span class="only-m">■ </span>Что видно</p>
+          <p class="t-body">
+            Какие функции есть почти в каждом сайте,<br class="only-m"> а какие встречаются редко<br class="br-xl">
+            и стоят дорого
+          </p>
+        </div>
+        <div class="fact">
+          <p class="t-label"><span class="only-m">■ </span>Разброс цен</p>
+          <p class="t-body">От сотен тысяч до нескольких миллионов рублей за сайт</p>
+        </div>
+      </div>
+
+      <p class="t-large data__note">
+        Это ориентир, а не цена <span class="only-d">от </span>конкретной студии.<span class="t-gray">
+          <span class="only-d">Разные подрядчики посчитают<br class="br-xl"> по-разному, поэтому допущения</span><span class="only-m">Допущения</span>
+          мы показываем открыто и уточняем по мере того,<br class="br-xl"> как собираем данные</span>
+      </p>
+    </div>
   </section>
 
-  <section class="about-section">
-    <h2>Для кого</h2>
-    <p>
-      Для владельцев небольших компаний, которые собираются заказать сайт или приложение.
-      И для менеджеров, которым поручили найти подрядчика и согласовать бюджет.
-    </p>
-    <p>
-      Техническая подготовка не нужна. Мы объясняем каждую функцию через последствия:
-      что изменится, если её убрать.
-    </p>
+  <section id="who" class="about-section about-row who">
+    <p class="t-label">■ Кто делает</p>
+    <div class="who__content">
+      <h2 class="t-h2">Медиа-сервис<br class="only-m"> издаёт <span class="t-accent">IT-бюро Терракот</span></h2>
+      <div class="principles">
+        <div class="principle">
+          <h3 class="t-h3">Наш принцип — достаточность</h3>
+          <p class="t-body">
+            Минимальный набор технологий, который решает задачу. Поэтому нам интереснее уменьшить смету, чем раздуть её
+          </p>
+        </div>
+        <div class="principle">
+          <h3 class="t-h3">Польза без договора</h3>
+          <p class="t-body">Материалы полезны сами по себе — даже если вы никогда не станете нашим клиентом</p>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <section class="about-section">
-    <h2>Как устроены разборы</h2>
-    <p>
-      Сначала вы решаете сами, потом сравниваете с редакцией. Вы вычёркиваете из техзадания то,
-      что кажется лишним, и сразу видите, как меняются сумма и срок. Потом смотрите, где ваш выбор
-      совпал с решением редакции, где разошёлся и почему.
-    </p>
-  </section>
-
-  <section class="about-section">
-    <h2>Как мы считаем</h2>
-    <p>
-      Любую сумму в наших материалах можно разложить на части. Мы показываем, как она получена,
-      чтобы с ней можно было согласиться или поспорить.
-    </p>
-
-    <ol class="about-steps">
-      <li>
-        <strong>Функции.</strong>
-        Смета складывается из функций, а не из числа страниц. Каждой функции мы даём размер:
-        от простого блока до отдельной системы вроде личного кабинета.
+  <section id="rules" class="about-section rules">
+    <p class="t-label">■ Наши правила</p>
+    <ol class="rules__list">
+      <li class="rule">
+        <span class="rule__num">( 1 )</span>
+        <div class="rule__text">
+          <h3 class="rule__title">Разбираем задачи,<br class="only-m"> не раскрывая студии</h3>
+          <p class="rule__desc">Компании в разборах вымышленные,<br> а пункты техзаданий берутся из реальных документов</p>
+        </div>
       </li>
-      <li>
-        <strong>Часы.</strong>
-        Каждому размеру соответствует диапазон часов работы.
+      <li class="rule">
+        <span class="rule__num">( 2 )</span>
+        <div class="rule__text">
+          <h3 class="rule__title">
+            Каждая цифра <span class="only-d"><br>с указанием источника</span><span class="only-m">с источником</span>
+          </h3>
+          <p class="rule__desc">
+            Реальные<span class="only-d"> кейсы</span><span class="only-m"> —</span> со ссылкой на источник, расчётные — с методикой
+          </p>
+        </div>
       </li>
-      <li>
-        <strong>Ставка.</strong>
-        Часы умножаем на ставку разработчика. Её берём из открытых данных о зарплатах и ценах фрилансеров.
-      </li>
-      <li>
-        <strong>Резерв и хостинг.</strong>
-        Добавляем <span class="placeholder">{резерв}</span>&nbsp;% на непредвиденное и стоимость хостинга с доменом на год.
+      <li class="rule">
+        <span class="rule__num">( 3 )</span>
+        <div class="rule__text">
+          <h3 class="rule__title">Ошибки исправляем открыто</h3>
+          <p class="rule__desc">Если читатель найдет неточность,<br> мы поправим и отметим это</p>
+        </div>
       </li>
     </ol>
-
-    <p class="about-formula">
-      <span class="hint">Формула:</span>
-      часы × ставка + резерв + хостинг на год
-    </p>
-
-    <h3>На чём основаны цифры</h3>
-    <p>
-      Мы изучили 14 техзаданий и договоров на сайты — госзакупки, договоры компаний и образцы
-      из открытых статей. По ним видно, какие функции есть почти в каждом сайте, а какие встречаются
-      редко и стоят дорого.
-    </p>
-    <p>
-      Это ориентир, а не цена конкретной студии: разные подрядчики посчитают по-разному, в изученных
-      договорах сайты стоили от сотен тысяч до нескольких миллионов рублей. Допущения мы показываем
-      открыто и уточняем по мере того, как собираем данные.
-    </p>
   </section>
+</main>
 
-  <section class="about-section">
-    <h2>Кто делает</h2>
-    <p>
-      «Смету на просвет» издаёт IT-бюро Терракот. Наш принцип — достаточность: минимальный набор
-      технологий, который решает задачу. Поэтому нам интереснее уменьшить смету, чем раздуть её.
-    </p>
-    <p>Материалы полезны сами по себе, даже если вы никогда не станете нашим клиентом.</p>
-  </section>
-
-  <section class="about-section">
-    <h2>Наши правила</h2>
-    <ul class="about-rules">
-      <li>
-        Разбираем задачи, а не подрядчиков. Компании в разборах вымышленные,
-        а пункты техзаданий взяты из реальных документов.
-      </li>
-      <li>Не называем студии и не составляем рейтингов.</li>
-      <li>Реальные цифры даём только со ссылкой на источник, расчётные — с методикой.</li>
-      <li>Ошибки исправляем открыто. Нашли неточность — напишите, мы поправим и отметим это.</li>
-    </ul>
-  </section>
-
-  <section class="about-section about-contacts">
-    <h2>Связь</h2>
-    <p>Новые разборы выходят в Telegram-канале.</p>
-    <p><%= render "telegram_button" %></p>
-    <p>
-      Нашли ошибку в расчёте или хотите поспорить с оценкой?
-      Пишите на <span class="placeholder">{почта}</span>.
-    </p>
-  </section>
-</div>
+<%= render "landing/footer" %>

@@ -1,0 +1,1257 @@
+/*
+ * Заглушка и «О проекте» по макетам из Figma (страница «макеты»: splash/*, about/*).
+ * Подключается только в layouts/landing, все правила внутри body.landing.
+ *
+ * Макеты: мобильный 393px (поля 24px), десктоп 1728px (поля 48px).
+ * До 1024px — мобильная раскладка, с 1024px — десктопная.
+ * Крупные размеры шрифтов плавно меняются между значениями из двух макетов (clamp).
+ */
+
+.landing {
+  --l-bg: #030303;          /* background/primary */
+  --l-text: #ffffff;        /* text/primary */
+  --l-accent: #fa5c1a;      /* text/accent, button/accent */
+  --l-gray: #464646;        /* text/gray */
+  --l-placeholder: #303030; /* background/gray */
+  --l-font: Manrope, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --l-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  /* Размеры шрифтов: мобильный → десктопный макет */
+  --fs-h1: clamp(32px, 17.87px + 3.596vw, 80px);
+  --fs-h2: clamp(28px, 22.11px + 1.498vw, 48px);
+  --fs-h3: clamp(20px, 17.65px + 0.599vw, 28px);
+  --fs-body: clamp(16px, 14.82px + 0.3vw, 20px);
+  --fs-label: clamp(14px, 13.41px + 0.15vw, 16px);
+
+  margin: 0;
+  background: var(--l-bg);
+  color: var(--l-text);
+  font: 400 16px/1.35 var(--l-font);
+  -webkit-font-smoothing: antialiased;
+}
+
+html:has(> body.landing) {
+  scroll-behavior: smooth;
+}
+
+/* Сбросы через :where, чтобы их перебивал любой класс */
+:where(.landing) *,
+:where(.landing) *::before,
+:where(.landing) *::after {
+  box-sizing: border-box;
+}
+
+:where(.landing) :where(h1, h2, h3, p, ol, ul) {
+  margin: 0;
+}
+
+:where(.landing) img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+:where(.landing) a {
+  color: inherit;
+}
+
+.landing :focus-visible {
+  outline: 2px solid var(--l-accent);
+  outline-offset: 2px;
+}
+
+/* Мобильный и десктопный варианты текста */
+@media (max-width: 1023.98px) {
+  .landing .only-d {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .landing .only-m {
+    display: none;
+  }
+}
+
+/* Ручные переносы строк из десктопного макета: на узком десктопе они дают висячие строки */
+@media (max-width: 1599.98px) {
+  .landing .br-xl {
+    display: none;
+  }
+}
+
+.l-container {
+  width: 100%;
+  max-width: 1728px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+@media (min-width: 768px) {
+  .l-container {
+    padding-inline: 40px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .l-container {
+    padding-inline: 48px;
+  }
+}
+
+/* Текстовые стили из макета */
+.t-label {
+  font: 400 var(--fs-label) / 1.25 var(--l-mono);
+  line-height: round(nearest, 1.25em, 1px);
+}
+
+.t-h2 {
+  font-size: var(--fs-h2);
+  font-weight: 500;
+  line-height: 1.1;
+  line-height: round(nearest, 1.1em, 1px);
+}
+
+.t-h3 {
+  font-size: var(--fs-h3);
+  font-weight: 500;
+  line-height: 1.1;
+  line-height: round(nearest, 1.1em, 1px);
+}
+
+.t-body {
+  font-size: var(--fs-body);
+  line-height: 1.35;
+  line-height: round(nearest, 1.35em, 1px);
+}
+
+.t-large {
+  font-size: var(--fs-h3);
+  font-weight: 500;
+  line-height: 1.35;
+  line-height: round(nearest, 1.35em, 1px);
+}
+
+.t-accent {
+  color: var(--l-accent);
+}
+
+.t-gray {
+  color: var(--l-gray);
+}
+
+@media (min-width: 1024px) {
+  .t-label {
+    line-height: 1.35;
+    line-height: round(nearest, 1.35em, 1px);
+  }
+
+  .t-h2 {
+    line-height: 1.15;
+    line-height: round(nearest, 1.15em, 1px);
+  }
+
+  .t-body {
+    font-weight: 500;
+  }
+}
+
+/* Сообщения notice и alert (в макете их нет, показываем скромно) */
+.landing .flash {
+  margin: 0;
+  padding: 12px 24px;
+  color: var(--l-accent);
+  font: 400 14px/1.25 var(--l-mono);
+}
+
+/* Логотип: значок и надпись */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  color: inherit;
+  white-space: nowrap;
+}
+
+.logo-icon {
+  flex: none;
+  height: auto;
+  overflow: visible;
+}
+
+/* Толщина линий значка задаётся в пикселях экрана, как в макете */
+.logo-icon path[stroke] {
+  stroke-width: var(--logo-stroke, 3px);
+  vector-effect: non-scaling-stroke;
+}
+
+.logo-text {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.logo-link {
+  display: inline-flex;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* В шапке и футере: 28px на мобильном, 36px на десктопе */
+.logo--nav {
+  --logo-stroke: 2px;
+  gap: 10.6px;
+  font-size: 28px;
+  line-height: 47px;
+}
+
+.logo--nav .logo-icon {
+  width: 46.4px;
+}
+
+@media (min-width: 1024px) {
+  .logo--nav {
+    --logo-stroke: 3px;
+    gap: 14px;
+    font-size: 36px;
+    line-height: 56px;
+  }
+
+  .logo--nav .logo-icon {
+    width: 68px;
+  }
+}
+
+/* Большой логотип на заглушке: 53.6px на мобильном, 110px на десктопе.
+   Отступ меньше, чем в макете, на запас под обводку справа у svg значка */
+.logo--splash {
+  --logo-stroke: 3px;
+  align-self: flex-start;
+  gap: 0.212em;
+  /* Логотип шириной ~5.95em; на экранах уже 393px уменьшаем, чтобы он помещался */
+  font-size: min(clamp(53.6px, 37px + 4.225vw, 80px), (100vw - 48px) / 5.95);
+  line-height: 1.194; /* строка логотипа 64px, как в макете */
+  line-height: round(nearest, 1.194em, 1px);
+}
+
+.logo--splash .logo-icon {
+  width: 1.172em;
+}
+
+.logo--splash .logo-text {
+  letter-spacing: 0;
+}
+
+@media (min-width: 1024px) {
+  .logo--splash {
+    --logo-stroke: clamp(3px, 0.2894vw, 5px);
+    gap: 0.184em;
+    font-size: min(110px, 6.366vw);
+    line-height: 1.1;
+    line-height: round(nearest, 1.1em, 1px);
+  }
+
+  .logo--splash .logo-icon {
+    width: 1.159em;
+  }
+}
+
+/* Ссылка «О проекте ↗» */
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  line-height: 1.35;
+  line-height: round(nearest, 1.35em, 1px);
+  text-decoration: none;
+}
+
+.arrow {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  stroke-width: 1;
+}
+
+@media (min-width: 1024px) {
+  .nav-link {
+    gap: 16px;
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  .nav-link .arrow {
+    stroke-width: 2;
+  }
+}
+
+/* ===== Заглушка (home/index) ===== */
+.splash {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+.splash-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 44px; /* 17px сверху + строка 27px */
+  padding-top: 17px;
+}
+
+.splash-main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 40px;
+  padding-top: 16px;
+  padding-bottom: 32px;
+}
+
+.splash-art {
+  order: -1;
+  width: 100%;
+  max-width: 600px;
+}
+
+.splash-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 600px;
+}
+
+.splash-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.splash-subtitle {
+  font-size: 16px;
+  line-height: 1.35;
+  line-height: round(nearest, 1.35em, 1px);
+}
+
+.subscribe-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  border-radius: 16px;
+  background: #ffffff;
+  color: #000000;
+}
+
+@media (min-width: 1024px) {
+  .splash-header {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+
+  .splash-header .t-label {
+    font-size: 16px;
+  }
+
+  .splash-main {
+    display: grid;
+    grid-template-columns: minmax(0, 700fr) minmax(0, 874fr);
+    column-gap: 3.554%;
+    align-items: center;
+    padding-top: 12px;
+    padding-bottom: 37px;
+  }
+
+  .splash-content {
+    gap: 72px;
+    max-width: none;
+  }
+
+  .splash-intro {
+    gap: 40px;
+  }
+
+  .splash-subtitle {
+    max-width: 622px;
+    font-size: var(--fs-h3);
+    font-weight: 500;
+  }
+
+  .subscribe-card {
+    gap: 20px;
+    padding: 32px;
+  }
+
+  /* Иллюстрация шире своего блока: выноска с подписью выходит за край, как в макете.
+     Блок 874×899, картинка 946×960 со сдвигом −70 и −24px.
+     Ширина ограничена высотой окна, чтобы заглушка помещалась на экран */
+  .splash-art {
+    order: 0;
+    position: relative;
+    justify-self: end;
+    max-width: calc((100svh - 140px) * 874 / 899);
+    aspect-ratio: 874 / 899;
+  }
+
+  .splash-art img {
+    position: absolute;
+    top: -2.67%;
+    left: -8.009%;
+    width: 108.238%;
+    max-width: none;
+  }
+}
+
+/* ===== Поле подписки (компонент EmailInput) ===== */
+.email-input {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  color: #000000;
+}
+
+.email-input__field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  height: 58px;
+  padding: 16px 20px;
+  border-radius: 52px;
+  background: #ffffff;
+  box-shadow: 0 0 0 2px #000000; /* обводка снаружи, как в макете */
+}
+
+.email-input__field input {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #000000;
+  font: 400 16px/1.2 var(--l-font);
+}
+
+.email-input__field input::placeholder {
+  color: var(--l-placeholder);
+  opacity: 1;
+}
+
+.email-input__send {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  padding: 2px;
+  border: 0;
+  background: none;
+  color: #030303;
+  cursor: pointer;
+}
+
+.email-input__send svg {
+  display: block;
+  width: 22px;
+  height: 22px;
+  overflow: visible;
+}
+
+/* Пока нет почты и галочки, кнопка серая и не нажимается */
+.email-input__send:disabled {
+  color: rgb(3 3 3 / 25%);
+  cursor: default;
+}
+
+.email-input.is-sent .email-input__send:disabled {
+  color: #030303;
+}
+
+.email-input__consent {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font: 400 14px/17px var(--l-font);
+  cursor: pointer;
+}
+
+.email-input__consent input {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  border: 1.5px solid #030303;
+  border-radius: 4px;
+  background: #ffffff center / 12px 10px no-repeat;
+  appearance: none;
+  cursor: pointer;
+}
+
+.email-input__consent input:checked {
+  border-color: var(--l-accent);
+  background-color: var(--l-accent);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 10' fill='none'%3E%3Cpath d='M1 5L4.5 8.5L11 1' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.email-input__consent input:disabled {
+  cursor: default;
+}
+
+.email-input__consent a {
+  text-decoration: underline;
+}
+
+.email-input__status {
+  padding-inline: 24px;
+  color: var(--l-accent);
+  font: 400 16px/22px var(--l-mono);
+}
+
+/* На мобильной заглушке поле ниже и с тонкой обводкой */
+@media (max-width: 1023.98px) {
+  .email-input--compact .email-input__field {
+    height: 50px;
+    padding: 12px 20px;
+    box-shadow: 0 0 0 1px #000000;
+  }
+}
+
+/* ===== «О проекте» (pages/about) ===== */
+.about-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 8px;
+}
+
+/* На мобильном в шапке только логотип */
+.about-nav .nav-link {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  /* Шапка 99px, логотип по центру строки 20–76px */
+  .about-nav {
+    height: 99px;
+    padding-top: 0;
+    padding-bottom: 3px;
+  }
+
+  .about-nav .nav-link {
+    display: inline-flex;
+  }
+}
+
+/* Первый экран */
+.about-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-top: 24px;
+}
+
+.about-hero__art img {
+  width: 100%;
+}
+
+.about-hero__body {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.about-hero__title {
+  font-size: var(--fs-h1);
+  font-weight: 500;
+  line-height: 1.1;
+  line-height: round(nearest, 1.1em, 1px);
+}
+
+/* На мобильном у блока якорей в макете фиксированная высота 289px */
+.about-anchors {
+  display: flex;
+  flex-direction: column;
+  min-height: 289px;
+}
+
+.about-anchors a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 16px 0;
+  box-shadow: inset 0 0.5px var(--l-text); /* линии внутри, как обводка в макете */
+  font-size: var(--fs-body);
+  line-height: 1.35;
+  line-height: round(nearest, 1.35em, 1px);
+  text-decoration: none;
+}
+
+.about-anchors a:last-child {
+  box-shadow: inset 0 0.5px var(--l-text), inset 0 -0.5px var(--l-text);
+}
+
+@media (min-width: 1024px) {
+  /* Заголовок и якоря лежат поверх нижней части графики */
+  .about-hero {
+    position: relative;
+    display: block;
+    margin-top: min(54px, 3.125vw);
+  }
+
+  .about-hero__body {
+    position: absolute;
+    right: 0;
+    bottom: max(-20px, -1.157vw);
+    left: 0;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .about-hero__title {
+    width: 60.66%;
+    line-height: 1;
+    line-height: round(nearest, 1em, 1px);
+  }
+
+  .about-anchors {
+    width: 26.9%;
+    min-height: 0;
+    margin-bottom: 9px;
+  }
+
+  .about-anchors a {
+    padding: 20px 0;
+    font-weight: 500;
+  }
+}
+
+/* Разделы: на мобильном между ними 72px, на десктопе — расстояния из макета */
+.about-section {
+  --gap: 72;
+  margin-top: 72px;
+  scroll-margin-top: 24px;
+}
+
+@media (min-width: 1024px) {
+  .about-section {
+    margin-top: max(72px, min(var(--gap) * 1px, var(--gap) * 100vw / 1728));
+  }
+
+  .why-hard {
+    --gap: 309;
+  }
+
+  .how {
+    --gap: 240;
+  }
+
+  .data {
+    --gap: 86;
+  }
+
+  .who {
+    --gap: 280;
+  }
+
+  .rules {
+    --gap: 72.5;
+  }
+}
+
+/* Подпись раздела слева, содержимое справа (346 + 113 + 1173 из 1632) */
+.about-row {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+@media (min-width: 1024px) {
+  .about-row {
+    display: grid;
+    grid-template-columns: minmax(0, 346fr) minmax(0, 1173fr);
+    column-gap: 6.924%;
+    align-items: start;
+  }
+}
+
+/* Почему смету трудно проверить */
+.why-hard {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.why-hard__intro,
+.why-hard__heading {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.why-hard__cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 16px;
+  background: var(--l-accent);
+  color: #ffffff;
+}
+
+.card__art {
+  flex: none;
+  width: 112px;
+}
+
+.card__art img {
+  width: 100%;
+}
+
+.card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.card__title {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.1;
+  line-height: round(nearest, 1.1em, 1px);
+}
+
+.card__text {
+  font-size: 14px;
+  line-height: 1.2;
+  line-height: round(nearest, 1.2em, 1px);
+}
+
+@media (min-width: 768px) {
+  .why-hard__cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .card {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 32px;
+    padding: clamp(20px, 1.852vw, 32px);
+  }
+
+  .card__art {
+    width: 100%;
+  }
+
+  .card__title {
+    font-size: var(--fs-h3);
+  }
+
+  .card__text {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .why-hard {
+    display: grid;
+    grid-template-columns: minmax(0, 531fr) minmax(0, 1081fr);
+    column-gap: 1.225%;
+  }
+
+  .why-hard__intro {
+    justify-content: space-between;
+  }
+
+  /* В макете карточки 347×498: минимальная высота по пропорции от ширины карточки.
+     Если текст длиннее, ряд растёт, и все три карточки тянутся до одной высоты */
+  .why-hard__cards {
+    container-type: inline-size;
+  }
+
+  .card {
+    min-height: calc((100cqw - 40px) / 3 * 498 / 347);
+  }
+
+  .why-hard__text {
+    max-width: 439px;
+  }
+}
+
+/* Как мы считаем */
+.how {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.formula {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 8px;
+}
+
+/* Обводка добавляет к размеру по 1px, как в макете (stroke включён в размер) */
+.formula__term {
+  padding: 10px 20px;
+  border: 1px solid var(--l-text);
+  border-radius: 101px;
+  font-size: var(--fs-h3);
+  font-weight: 500;
+  line-height: 1.1;
+  line-height: round(nearest, 1.1em, 1px);
+  white-space: nowrap;
+}
+
+.formula__term--accent {
+  border: 0;
+  background: var(--l-accent);
+}
+
+.formula__op {
+  color: var(--l-accent);
+  font-size: var(--fs-h3);
+  font-weight: 500;
+  line-height: 1.1;
+  line-height: round(nearest, 1.1em, 1px);
+}
+
+.steps {
+  padding: 0;
+  list-style: none;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 0;
+  box-shadow: inset 0 1px var(--l-text); /* линия внутри строки, как обводка в макете */
+  font-size: var(--fs-body);
+  line-height: 1.35;
+  line-height: round(nearest, 1.35em, 1px);
+}
+
+.step:last-child {
+  padding-bottom: 0;
+}
+
+.step__head {
+  display: flex;
+  gap: 16px;
+}
+
+@media (min-width: 1024px) {
+  .how {
+    gap: 96px;
+  }
+
+  .formula {
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .formula__term {
+    padding: 24px 44px;
+  }
+
+  .formula__term--accent {
+    padding: 24px 44px;
+  }
+
+  .formula__op {
+    font-size: var(--fs-h2);
+    line-height: 1.15;
+    line-height: round(nearest, 1.15em, 1px);
+  }
+
+  /* Номер, название и описание шага — колонки 92 / 458 / остальное из 1172 */
+  .step {
+    display: grid;
+    grid-template-columns: 7.823% 39.117% minmax(0, 1fr);
+    gap: 0;
+    padding: 24px 0;
+    font-weight: 500;
+  }
+
+  .step:last-child {
+    padding-bottom: 24px;
+    box-shadow: inset 0 1px var(--l-text), inset 0 -1px var(--l-text);
+  }
+
+  .step__head {
+    display: contents;
+  }
+}
+
+/* На чём основаны цифры. На мобильном блоки идут друг за другом в своём порядке */
+.data {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.data__aside,
+.data__content {
+  display: contents;
+}
+
+.data__label {
+  order: 1;
+}
+
+.data__title {
+  order: 2;
+}
+
+.data__matrix {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  order: 3;
+}
+
+.data__matrix img {
+  width: 100%;
+  max-width: 600px;
+}
+
+.data__legend {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0;
+  list-style: none;
+}
+
+.facts {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  order: 4;
+}
+
+.fact,
+.principle {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 16px;
+  box-shadow: inset 0 0.5px var(--l-text);
+}
+
+.data__note {
+  order: 5;
+}
+
+@media (min-width: 1024px) {
+  .data {
+    display: grid;
+    grid-template-columns: minmax(0, 346fr) minmax(0, 1173fr);
+    column-gap: 6.924%;
+    align-items: start;
+  }
+
+  .data__aside {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .data__content {
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+  }
+
+  .data__matrix {
+    gap: 24px;
+  }
+
+  .data__legend {
+    gap: 12px;
+  }
+
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .fact,
+  .principle {
+    gap: 16px;
+    padding-top: 20px;
+  }
+}
+
+/* Кто делает */
+.who__content,
+.principles {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+@media (min-width: 1024px) {
+  .who__content {
+    gap: 64px;
+  }
+
+  .principles {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .principle .t-body {
+    max-width: 439px;
+  }
+}
+
+/* Наши правила */
+.rules__list {
+  margin-top: 32px;
+  padding: 0;
+  list-style: none;
+}
+
+.rule {
+  display: flex;
+  padding: 16px 0;
+  box-shadow: inset 0 0.5px var(--l-text);
+}
+
+.rule:last-child {
+  box-shadow: inset 0 0.5px var(--l-text), inset 0 -0.5px var(--l-text);
+}
+
+.rule__num {
+  flex: none;
+  width: 64px;
+  font: 400 14px/1.25 var(--l-mono);
+}
+
+.rule__text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rule__title {
+  font-size: var(--fs-h3);
+  font-weight: 500;
+  line-height: 1.1;
+  line-height: round(nearest, 1.1em, 1px);
+}
+
+.rule__desc {
+  font-size: 14px;
+  line-height: 1.2;
+  line-height: round(nearest, 1.2em, 1px);
+}
+
+@media (min-width: 1024px) {
+  .rules__list {
+    margin-top: 48px;
+  }
+
+  /* Номер, заголовок и описание — колонки 346 / 622 / 439 через 112px */
+  .rule {
+    display: grid;
+    grid-template-columns: minmax(0, 346fr) minmax(0, 622fr) minmax(0, 439fr);
+    column-gap: 6.863%;
+    padding: 32px 0;
+  }
+
+  .rule__text {
+    display: contents;
+  }
+
+  .rule__num {
+    width: auto;
+    font: 500 var(--fs-h3) / 1.1 var(--l-font);
+    line-height: round(nearest, 1.1em, 1px);
+  }
+
+  .rule__title {
+    font-size: var(--fs-h2);
+    line-height: 1.15;
+    line-height: round(nearest, 1.15em, 1px);
+  }
+
+  .rule__desc {
+    font-size: var(--fs-body);
+    font-weight: 500;
+    line-height: 1.35;
+    line-height: round(nearest, 1.35em, 1px);
+  }
+}
+
+/* ===== Футер ===== */
+.footer {
+  margin-top: 80px;
+  background: #ffffff;
+  color: #000000;
+}
+
+.footer__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "logo top"
+    "label label"
+    "slogan slogan"
+    "subscribe subscribe";
+  align-items: center;
+  padding-top: 13px;
+  padding-bottom: 75px;
+}
+
+/* В футере подпись всегда в десктопном стиле Body/Label: 16px / 135% */
+.footer__label {
+  grid-area: label;
+  margin-top: 22px;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.footer__logo {
+  grid-area: logo;
+}
+
+.footer__top {
+  grid-area: top;
+}
+
+.footer__slogan {
+  grid-area: slogan;
+  margin-top: 16px;
+  font-size: var(--fs-h2);
+  font-weight: 500;
+  line-height: 1.1;
+  line-height: round(nearest, 1.1em, 1px);
+}
+
+.footer__subscribe {
+  display: flex;
+  flex-direction: column;
+  grid-area: subscribe;
+  gap: 20px;
+  margin-top: 32px;
+}
+
+.footer__telegram {
+  align-self: flex-start;
+  font-size: var(--fs-h3);
+  font-weight: 500;
+  line-height: 1.35;
+  line-height: round(nearest, 1.35em, 1px);
+  text-decoration: none;
+}
+
+/* По макету на мобильном колонки со ссылками нет */
+.footer__links {
+  display: none;
+}
+
+.scroll-top {
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #999999;
+  color: #ffffff;
+}
+
+.scroll-top svg {
+  width: 26px;
+  height: 25px;
+}
+
+@media (min-width: 1024px) {
+  .footer {
+    margin-top: max(80px, min(183.5px, 183.5 * 100vw / 1728));
+  }
+
+  /* Колонки 439 / 620 / 347 через 113px */
+  .footer__grid {
+    grid-template-columns: minmax(0, 439fr) minmax(0, 620fr) minmax(0, 347fr);
+    grid-template-areas:
+      "label logo top"
+      "subscribe slogan links";
+    column-gap: 6.924%;
+    row-gap: 21px;
+    align-items: start;
+    padding-top: 46px;
+    padding-bottom: 68px;
+  }
+
+  .footer__label {
+    margin-top: 0;
+  }
+
+  .footer__logo {
+    margin-top: 11px;
+  }
+
+  .footer__top {
+    justify-self: end;
+    margin-top: 3px;
+  }
+
+  .footer__slogan,
+  .footer__subscribe {
+    margin-top: 0;
+  }
+
+  .footer__slogan {
+    line-height: 1.15;
+    line-height: round(nearest, 1.15em, 1px);
+  }
+
+  .footer__links {
+    display: flex;
+    flex-direction: column;
+    grid-area: links;
+    gap: 20px;
+  }
+
+  .footer__about {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 163px;
+    font-size: var(--fs-body);
+    font-weight: 500;
+    line-height: 1.35;
+    line-height: round(nearest, 1.35em, 1px);
+    text-decoration: none;
+  }
+
+  .footer__docs {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    color: var(--l-gray);
+    font-size: 16px;
+    line-height: 1.2;
+    line-height: round(nearest, 1.2em, 1px);
+  }
+
+  .footer__docs a {
+    text-decoration: none;
+  }
+}

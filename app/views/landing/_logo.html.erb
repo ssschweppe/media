@@ -1,0 +1,13 @@
+<%# Логотип: значок кота и надпись «терракот». Линии значка рисуются цветом текста (currentColor) %>
+<% tag_name = local_assigns.fetch(:tag_name, :span) %>
+<%= content_tag tag_name, class: [ "logo", local_assigns[:modifier] ] do %>
+  <svg class="logo-icon" viewBox="0 0 68 61" fill="none" aria-hidden="true">
+    <path d="M41 38.9805L27 39.9805L29.5 26.9805H43L41 38.9805Z" fill="#FA5C1A"/>
+    <path d="M16.5 59.9805L26 7.98054L40 24.4805L53 3.98054L63 54.9805" stroke="currentColor"/>
+    <path d="M62.375 38.4805L47.5 39.4805L49.5 26.4805L64.5 24.4805L62.375 38.4805Z" fill="#FA5C1A"/>
+    <path d="M0 25.9805C2.4 25.9805 20.6667 27.3139 29.5 27.9805C28.3333 32.6472 26.2 41.8805 27 41.4805C27.8 41.0805 36.6667 39.6472 41 38.9805L43.5 27.9805L50.5 26.9805L49 38.9805L62 37.4805L66 23.4805L55.5 22.9805" stroke="currentColor"/>
+    <path d="M44.75 46.4805L38.75 50.4805" stroke="currentColor"/>
+    <path d="M44.75 46.4805L50.75 50.4805" stroke="currentColor"/>
+  </svg>
+  <span class="logo-text">терракот</span>
+<% end %>

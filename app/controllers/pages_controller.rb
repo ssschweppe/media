@@ -1,10 +1,7 @@
 class PagesController < ApplicationController
-  # Разбор строительной компании: на него ведёт кнопка «Попробовать разбор»
-  DEMO_POST_SLUG = "stroitelnaya-kompaniya"
+  layout "landing"
 
-  # Статическая страница, в админке не редактируется.
-  # Кнопка показывается, только если разбор опубликован, иначе @demo_post будет nil
+  # Статическая страница «О проекте», в админке не редактируется
   def about
-    @demo_post = Post.published.find_by(slug: DEMO_POST_SLUG)
   end
 end
