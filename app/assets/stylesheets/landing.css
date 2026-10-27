@@ -598,7 +598,8 @@ html:has(> body.landing) {
   .about-hero {
     position: relative;
     display: block;
-    margin-top: min(54px, 3.125vw);
+    /* Графика поднята на 40px относительно макета, заголовок и рубрики остаются на месте */
+    margin-top: max(0px, min(54px, 3.125vw) - 40px);
   }
 
   /* Первый экран помещается в окно: шапка 99px, отступ сверху, графика, выступ заголовка 20px
@@ -611,7 +612,7 @@ html:has(> body.landing) {
   .about-hero__body {
     position: absolute;
     right: 0;
-    bottom: max(-20px, -1.157vw);
+    bottom: calc(max(-20px, -1.157vw) - 40px);
     left: 0;
     flex-direction: row;
     align-items: flex-end;
@@ -650,8 +651,9 @@ html:has(> body.landing) {
     margin-top: max(72px, min(var(--gap) * 1px, var(--gap) * 100vw / 1728));
   }
 
+  /* 309 по макету + 40px, на которые поднята графика первого экрана */
   .why-hard {
-    --gap: 309;
+    --gap: 349;
   }
 
   .how {
