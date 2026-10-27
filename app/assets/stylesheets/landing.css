@@ -15,6 +15,8 @@
   --l-placeholder: #303030; /* background/gray */
   --l-font: Manrope, system-ui, -apple-system, "Segoe UI", sans-serif;
   --l-mono: "IBM Plex Mono", ui-monospace, monospace;
+  /* Разделительная линия рисуется фоном: обводка или тень дают артефакты по краям на телефонах */
+  --line: linear-gradient(var(--l-text) 0 0);
 
   /* Размеры шрифтов: мобильный → десктопный макет */
   --fs-h1: clamp(32px, 17.87px + 3.596vw, 80px);
@@ -311,17 +313,32 @@ html:has(> body.landing) {
   padding-bottom: 32px;
 }
 
+/* На мобильном картинка во всю ширину экрана (поверх полей контейнера).
+   Если экран низкий, картинка обрезается сверху и снизу, чтобы рассылка помещалась на первом экране */
 .splash-art {
   order: -1;
-  width: 100%;
-  max-width: 600px;
+  margin-inline: -24px;
 }
 
+.splash-art img {
+  width: 100%;
+  max-height: max(160px, 100svh - 470px);
+  object-fit: cover;
+}
+
+@media (min-width: 768px) and (max-width: 1023.98px) {
+  .splash-art {
+    margin-inline: -40px;
+  }
+}
+
+/* Блок с логотипом и рассылкой прижат к нижнему краю экрана */
 .splash-content {
   display: flex;
   flex-direction: column;
   gap: 24px;
   max-width: 600px;
+  margin-top: auto;
 }
 
 .splash-intro {
@@ -368,6 +385,7 @@ html:has(> body.landing) {
   .splash-content {
     gap: 72px;
     max-width: none;
+    margin-top: 0;
   }
 
   .splash-intro {
@@ -391,6 +409,8 @@ html:has(> body.landing) {
   .splash-art {
     order: 0;
     position: relative;
+    width: 100%;
+    margin-inline: 0;
     justify-self: end;
     max-width: calc((100svh - 140px) * 874 / 899);
     aspect-ratio: 874 / 899;
@@ -402,6 +422,8 @@ html:has(> body.landing) {
     left: -8.009%;
     width: 108.238%;
     max-width: none;
+    max-height: none;
+    object-fit: fill;
   }
 }
 
@@ -552,6 +574,25 @@ html:has(> body.landing) {
   margin-top: 24px;
 }
 
+/* На мобильном первый экран во всю высоту окна, заголовок и рубрики прижаты к нижнему краю.
+   79px — шапка с логотипом (8 + 47) и отступ под ней (24) */
+@media (max-width: 1023.98px) {
+  .about-hero {
+    min-height: calc(100svh - 79px);
+    padding-bottom: 24px;
+  }
+
+  .about-hero__body {
+    margin-top: auto;
+  }
+
+  /* На низких экранах графика уменьшается, чтобы рубрики помещались на первом экране */
+  .about-hero__art img {
+    max-height: max(130px, 100svh - 535px);
+    object-fit: contain;
+  }
+}
+
 .about-hero__art img {
   width: 100%;
 }
@@ -569,11 +610,9 @@ html:has(> body.landing) {
   line-height: round(nearest, 1.1em, 1px);
 }
 
-/* На мобильном у блока якорей в макете фиксированная высота 289px */
 .about-anchors {
   display: flex;
   flex-direction: column;
-  min-height: 289px;
 }
 
 .about-anchors a {
@@ -582,7 +621,7 @@ html:has(> body.landing) {
   justify-content: space-between;
   gap: 14px;
   padding: 16px 0;
-  box-shadow: inset 0 0.5px var(--l-text); /* линии внутри, как обводка в макете */
+  background: var(--line) top / 100% 0.5px no-repeat; /* линия сверху внутри блока, как обводка в макете */
   font-size: var(--fs-body);
   line-height: 1.35;
   line-height: round(nearest, 1.35em, 1px);
@@ -590,7 +629,7 @@ html:has(> body.landing) {
 }
 
 .about-anchors a:last-child {
-  box-shadow: inset 0 0.5px var(--l-text), inset 0 -0.5px var(--l-text);
+  background: var(--line) top / 100% 0.5px no-repeat, var(--line) bottom / 100% 0.5px no-repeat;
 }
 
 @media (min-width: 1024px) {
@@ -628,7 +667,6 @@ html:has(> body.landing) {
   /* Фон цвета сайта, чтобы линии графики не сливались с текстом (в макете у фрейма заливка #030303) */
   .about-anchors {
     width: 26.9%;
-    min-height: 0;
     margin-bottom: 9px;
     background: var(--l-bg);
   }
@@ -851,7 +889,7 @@ html:has(> body.landing) {
   flex-direction: column;
   gap: 12px;
   padding: 16px 0;
-  box-shadow: inset 0 1px var(--l-text); /* линия внутри строки, как обводка в макете */
+  background: var(--line) top / 100% 1px no-repeat;
   font-size: var(--fs-body);
   line-height: 1.35;
   line-height: round(nearest, 1.35em, 1px);
@@ -901,7 +939,7 @@ html:has(> body.landing) {
 
   .step:last-child {
     padding-bottom: 24px;
-    box-shadow: inset 0 1px var(--l-text), inset 0 -1px var(--l-text);
+    background: var(--line) top / 100% 1px no-repeat, var(--line) bottom / 100% 1px no-repeat;
   }
 
   .step__head {
@@ -962,7 +1000,7 @@ html:has(> body.landing) {
   flex-direction: column;
   gap: 12px;
   padding-top: 16px;
-  box-shadow: inset 0 0.5px var(--l-text);
+  background: var(--line) top / 100% 0.5px no-repeat;
 }
 
 .data__note {
@@ -1044,11 +1082,11 @@ html:has(> body.landing) {
 .rule {
   display: flex;
   padding: 16px 0;
-  box-shadow: inset 0 0.5px var(--l-text);
+  background: var(--line) top / 100% 0.5px no-repeat;
 }
 
 .rule:last-child {
-  box-shadow: inset 0 0.5px var(--l-text), inset 0 -0.5px var(--l-text);
+  background: var(--line) top / 100% 0.5px no-repeat, var(--line) bottom / 100% 0.5px no-repeat;
 }
 
 .rule__num {
