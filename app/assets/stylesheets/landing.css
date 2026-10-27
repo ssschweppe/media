@@ -1,12 +1,3 @@
-/*
- * Заглушка и «О проекте» по макетам из Figma (страница «макеты»: splash/*, about/*).
- * Подключается только в layouts/landing, все правила внутри body.landing.
- *
- * Макеты: мобильный 393px (поля 24px), десктоп 1728px (поля 48px).
- * До 1024px — мобильная раскладка, с 1024px — десктопная.
- * Крупные размеры шрифтов плавно меняются между значениями из двух макетов (clamp).
- */
-
 .landing {
   --l-bg: #030303;          /* background/primary */
   --l-text: #ffffff;        /* text/primary */
@@ -15,10 +6,9 @@
   --l-placeholder: #303030; /* background/gray */
   --l-font: Manrope, system-ui, -apple-system, "Segoe UI", sans-serif;
   --l-mono: "IBM Plex Mono", ui-monospace, monospace;
-  /* Разделительная линия рисуется фоном: обводка или тень дают артефакты по краям на телефонах */
+
   --line: linear-gradient(var(--l-text) 0 0);
 
-  /* Размеры шрифтов: мобильный → десктопный макет */
   --fs-h1: clamp(32px, 17.87px + 3.596vw, 80px);
   --fs-h2: clamp(28px, 22.11px + 1.498vw, 48px);
   --fs-h3: clamp(20px, 17.65px + 0.599vw, 28px);
@@ -63,7 +53,7 @@ html:has(> body.landing) {
   outline-offset: 2px;
 }
 
-/* Мобильный и десктопный варианты текста */
+
 @media (max-width: 1023.98px) {
   .landing .only-d {
     display: none;
@@ -76,7 +66,7 @@ html:has(> body.landing) {
   }
 }
 
-/* Ручные переносы строк из десктопного макета: на узком десктопе они дают висячие строки */
+
 @media (max-width: 1599.98px) {
   .landing .br-xl {
     display: none;
@@ -102,7 +92,6 @@ html:has(> body.landing) {
   }
 }
 
-/* Текстовые стили из макета */
 .t-label {
   font: 400 var(--fs-label) / 1.25 var(--l-mono);
   line-height: round(nearest, 1.25em, 1px);
@@ -159,7 +148,6 @@ html:has(> body.landing) {
   }
 }
 
-/* Сообщения notice и alert (в макете их нет, показываем скромно) */
 .landing .flash {
   margin: 0;
   padding: 12px 24px;
@@ -167,7 +155,6 @@ html:has(> body.landing) {
   font: 400 14px/1.25 var(--l-mono);
 }
 
-/* Логотип: значок и надпись */
 .logo {
   display: inline-flex;
   align-items: center;
@@ -182,7 +169,6 @@ html:has(> body.landing) {
   overflow: visible;
 }
 
-/* Толщина линий значка задаётся в пикселях экрана, как в макете */
 .logo-icon path[stroke] {
   stroke-width: var(--logo-stroke, 3px);
   vector-effect: non-scaling-stroke;
@@ -199,7 +185,6 @@ html:has(> body.landing) {
   text-decoration: none;
 }
 
-/* В шапке и футере: 28px на мобильном, 36px на десктопе */
 .logo--nav {
   --logo-stroke: 2px;
   gap: 10.6px;
@@ -224,13 +209,10 @@ html:has(> body.landing) {
   }
 }
 
-/* Большой логотип на заглушке: 53.6px на мобильном, 110px на десктопе.
-   Отступ меньше, чем в макете, на запас под обводку справа у svg значка */
 .logo--splash {
   --logo-stroke: 3px;
   align-self: flex-start;
   gap: 0.212em;
-  /* Логотип шириной ~5.95em; на экранах уже 393px уменьшаем, чтобы он помещался */
   font-size: min(clamp(53.6px, 37px + 4.225vw, 80px), (100vw - 48px) / 5.95);
   line-height: 1.194; /* строка логотипа 64px, как в макете */
   line-height: round(nearest, 1.194em, 1px);
@@ -258,7 +240,6 @@ html:has(> body.landing) {
   }
 }
 
-/* Ссылка «О проекте ↗» */
 .nav-link {
   display: inline-flex;
   align-items: center;
@@ -288,7 +269,6 @@ html:has(> body.landing) {
   }
 }
 
-/* ===== Заглушка (home/index) ===== */
 .splash {
   display: flex;
   flex-direction: column;
@@ -300,7 +280,7 @@ html:has(> body.landing) {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 44px; /* 17px сверху + строка 27px */
+  min-height: 44px; 
   padding-top: 17px;
 }
 
@@ -312,8 +292,6 @@ html:has(> body.landing) {
   padding-bottom: 32px;
 }
 
-/* На мобильном картинка во всю ширину экрана (поверх полей контейнера).
-   Если экран низкий, картинка обрезается сверху и снизу, чтобы рассылка помещалась на первом экране */
 .splash-art {
   order: -1;
   margin-inline: -24px;
@@ -331,8 +309,6 @@ html:has(> body.landing) {
   }
 }
 
-/* Рассылка прижата к нижнему краю экрана, а логотип с текстом стоят посередине
-   между картинкой и рассылкой: равные автоматические отступы, но не меньше 24px */
 .splash-content {
   display: flex;
   flex: 1;
@@ -405,9 +381,6 @@ html:has(> body.landing) {
     padding: 32px;
   }
 
-  /* Иллюстрация шире своего блока: выноска с подписью выходит за край, как в макете.
-     Блок 874×899, картинка 946×960 со сдвигом −70 и −24px.
-     Ширина ограничена высотой окна, чтобы заглушка помещалась на экран */
   .splash-art {
     order: 0;
     position: relative;
@@ -429,7 +402,6 @@ html:has(> body.landing) {
   }
 }
 
-/* ===== Поле подписки (компонент EmailInput) ===== */
 .email-input {
   display: flex;
   flex-direction: column;
@@ -483,7 +455,6 @@ html:has(> body.landing) {
   overflow: visible;
 }
 
-/* Пока нет почты и галочки, кнопка серая и не нажимается */
 .email-input__send:disabled {
   color: rgb(3 3 3 / 25%);
   cursor: default;
@@ -533,7 +504,6 @@ html:has(> body.landing) {
   font: 400 16px/22px var(--l-mono);
 }
 
-/* На мобильной заглушке поле ниже и с тонкой обводкой */
 @media (max-width: 1023.98px) {
   .email-input--compact .email-input__field {
     height: 50px;
@@ -542,7 +512,6 @@ html:has(> body.landing) {
   }
 }
 
-/* ===== «О проекте» (pages/about) ===== */
 .about-nav {
   display: flex;
   align-items: center;
@@ -550,13 +519,11 @@ html:has(> body.landing) {
   padding-top: 8px;
 }
 
-/* На мобильном в шапке только логотип */
 .about-nav .nav-link {
   display: none;
 }
 
 @media (min-width: 1024px) {
-  /* Шапка 99px, логотип по центру строки 20–76px */
   .about-nav {
     height: 99px;
     padding-top: 0;
@@ -568,7 +535,6 @@ html:has(> body.landing) {
   }
 }
 
-/* Первый экран */
 .about-hero {
   display: flex;
   flex-direction: column;
@@ -576,8 +542,6 @@ html:has(> body.landing) {
   margin-top: 24px;
 }
 
-/* На мобильном первый экран во всю высоту окна, заголовок и рубрики прижаты к нижнему краю.
-   79px — шапка с логотипом (8 + 47) и отступ под ней (24) */
 @media (max-width: 1023.98px) {
   .about-hero {
     min-height: calc(100svh - 79px);
@@ -588,7 +552,6 @@ html:has(> body.landing) {
     margin-top: auto;
   }
 
-  /* На низких экранах графика уменьшается, чтобы рубрики помещались на первом экране */
   .about-hero__art img {
     max-height: max(130px, 100svh - 535px);
     object-fit: contain;
@@ -623,7 +586,7 @@ html:has(> body.landing) {
   justify-content: space-between;
   gap: 14px;
   padding: 16px 0;
-  background: var(--line) top / 100% 0.5px no-repeat; /* линия сверху внутри блока, как обводка в макете */
+  background: var(--line) top / 100% 0.5px no-repeat; 
   font-size: var(--fs-body);
   line-height: 1.35;
   line-height: round(nearest, 1.35em, 1px);
@@ -635,16 +598,12 @@ html:has(> body.landing) {
 }
 
 @media (min-width: 1024px) {
-  /* Заголовок и якоря лежат поверх нижней части графики */
   .about-hero {
     position: relative;
     display: block;
-    /* Графика поднята на 40px относительно макета, заголовок и рубрики остаются на месте */
     margin-top: max(0px, min(54px, 3.125vw) - 40px);
   }
 
-  /* Первый экран помещается в окно: шапка 99px, отступ сверху, графика, выступ заголовка 20px
-     и 60px до нижнего края. На невысоких экранах графика уменьшается и встаёт по центру */
   .about-hero__art img {
     max-height: max(360px, 100svh - 99px - min(54px, 3.125vw) - 20px - 60px);
     object-fit: contain;
@@ -666,7 +625,6 @@ html:has(> body.landing) {
     line-height: round(nearest, 1em, 1px);
   }
 
-  /* Фон цвета сайта, чтобы линии графики не сливались с текстом (в макете у фрейма заливка #030303) */
   .about-anchors {
     width: 26.9%;
     margin-bottom: 9px;
@@ -679,7 +637,6 @@ html:has(> body.landing) {
   }
 }
 
-/* Разделы: на мобильном между ними 72px, на десктопе — расстояния из макета */
 .about-section {
   --gap: 72;
   margin-top: 72px;
@@ -691,7 +648,6 @@ html:has(> body.landing) {
     margin-top: max(72px, min(var(--gap) * 1px, var(--gap) * 100vw / 1728));
   }
 
-  /* 309 по макету + 40px, на которые поднята графика первого экрана */
   .why-hard {
     --gap: 349;
   }
@@ -704,8 +660,6 @@ html:has(> body.landing) {
     --gap: 86;
   }
 
-  /* В макете 280px, но после «На чём основаны цифры» это выглядит как случайная дыра:
-     делаем как перед этим блоком */
   .who {
     --gap: 86;
   }
@@ -715,7 +669,6 @@ html:has(> body.landing) {
   }
 }
 
-/* Подпись раздела слева, содержимое справа (346 + 113 + 1173 из 1632) */
 .about-row {
   display: flex;
   flex-direction: column;
@@ -731,7 +684,6 @@ html:has(> body.landing) {
   }
 }
 
-/* Почему смету трудно проверить */
 .why-hard {
   display: flex;
   flex-direction: column;
@@ -827,8 +779,6 @@ html:has(> body.landing) {
     justify-content: space-between;
   }
 
-  /* В макете карточки 347×498: минимальная высота по пропорции от ширины карточки.
-     Если текст длиннее, ряд растёт, и все три карточки тянутся до одной высоты */
   .why-hard__cards {
     container-type: inline-size;
   }
@@ -842,7 +792,6 @@ html:has(> body.landing) {
   }
 }
 
-/* Как мы считаем */
 .how {
   display: flex;
   flex-direction: column;
@@ -856,7 +805,6 @@ html:has(> body.landing) {
   gap: 10px 8px;
 }
 
-/* Обводка добавляет к размеру по 1px, как в макете (stroke включён в размер) */
 .formula__term {
   padding: 10px 20px;
   border: 1px solid var(--l-text);
@@ -949,7 +897,6 @@ html:has(> body.landing) {
   }
 }
 
-/* На чём основаны цифры. На мобильном блоки идут друг за другом в своём порядке */
 .data {
   display: flex;
   flex-direction: column;
@@ -1050,7 +997,6 @@ html:has(> body.landing) {
   }
 }
 
-/* Кто делает */
 .who__content,
 .principles {
   display: flex;
@@ -1074,7 +1020,6 @@ html:has(> body.landing) {
   }
 }
 
-/* Наши правила */
 .rules__list {
   margin-top: 32px;
   padding: 0;
@@ -1121,7 +1066,6 @@ html:has(> body.landing) {
     margin-top: 48px;
   }
 
-  /* Номер, заголовок и описание — колонки 346 / 622 / 439 через 112px */
   .rule {
     display: grid;
     grid-template-columns: minmax(0, 346fr) minmax(0, 622fr) minmax(0, 439fr);
@@ -1153,7 +1097,6 @@ html:has(> body.landing) {
   }
 }
 
-/* ===== Футер ===== */
 .footer {
   margin-top: 80px;
   background: #ffffff;
@@ -1173,7 +1116,6 @@ html:has(> body.landing) {
   padding-bottom: 75px;
 }
 
-/* В футере подпись всегда в десктопном стиле Body/Label: 16px / 135% */
 .footer__label {
   grid-area: label;
   margin-top: 22px;

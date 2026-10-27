@@ -2,7 +2,6 @@ class CreatePosts < ActiveRecord::Migration[8.1]
   def change
     create_table :posts do |t|
       t.references :rubric, null: false, foreign_key: true
-      # Категория необязательна: не у каждого поста есть тип продукта
       t.references :category, foreign_key: true
       t.string :title, null: false
       t.string :slug, null: false

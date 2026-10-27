@@ -1,7 +1,5 @@
 <% content_for :title, "О проекте" %>
 
-<%# Страница «О проекте». Макеты: about/desktop и about/mobile в Figma.
-    Где мобильный текст отличается от десктопного, нужный вариант показывают классы only-d / only-m %>
 <header class="about-nav l-container">
   <%= link_to root_path, class: "logo-link", aria: { label: "терракот — на главную" } do %>
     <%= render "landing/logo", modifier: "logo--nav" %>

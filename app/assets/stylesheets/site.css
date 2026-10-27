@@ -1,6 +1,3 @@
-/* Стили обычных публичных страниц: шапка, список постов, пост. Заглушка и «О проекте» — в landing.css */
-
-/* Шапка (application/_menubar) */
 .site-header {
   display: flex;
   flex-wrap: wrap;

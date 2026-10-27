@@ -1,7 +1,6 @@
 class Admin::PostsController < Admin::BaseController
   before_action :set_post, only: %i[ show edit update destroy ]
 
-  # В админке видны все посты: черновики, опубликованные и архив
   def index
     @posts = Post.includes(:rubric, :category).order(created_at: :desc)
     @posts = @posts.where(status: params[:status]) if Post::STATUSES.key?(params[:status])
@@ -46,7 +45,6 @@ class Admin::PostsController < Admin::BaseController
     @post = Post.find(params.expect(:id))
   end
 
-  # cover_cache сохраняет загруженную обложку, если форма вернулась с ошибкой
   def post_params
     params.expect(post: [ :rubric_id, :category_id, :title, :slug, :lead,
                           :cover, :cover_cache, :remove_cover, :body, :status ])

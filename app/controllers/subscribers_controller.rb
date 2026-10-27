@@ -1,12 +1,10 @@
 class SubscribersController < ApplicationController
-  # Форм подписки две: на заглушке и в футере «О проекте». По placement понимаем, какую обновить
   PLACEMENTS = %w[splash footer].freeze
 
   def create
     @subscriber = Subscriber.new(subscriber_params)
     @placement = PLACEMENTS.include?(params[:placement]) ? params[:placement] : PLACEMENTS.first
 
-    # Повторная подписка тоже считается успешной: не сообщаем, есть ли адрес в базе
     sent = @subscriber.save || already_subscribed?
 
     respond_to do |format|

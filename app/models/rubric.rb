@@ -1,5 +1,4 @@
 class Rubric < ApplicationRecord
-  # Рубрику с постами удалить нельзя: destroy вернёт false и добавит понятную ошибку
   has_many :posts, dependent: :restrict_with_error
 
   validates :name, presence: true

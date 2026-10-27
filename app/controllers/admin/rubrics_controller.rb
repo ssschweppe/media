@@ -35,7 +35,6 @@ class Admin::RubricsController < Admin::BaseController
   end
 
   def destroy
-    # Если в рубрике есть посты, destroy вернёт false, а причина будет в errors
     if @rubric.destroy
       redirect_to admin_rubrics_path, notice: "Рубрика удалена", status: :see_other
     else

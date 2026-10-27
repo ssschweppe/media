@@ -35,7 +35,6 @@ class Admin::CategoriesController < Admin::BaseController
   end
 
   def destroy
-    # Если в категории есть посты, destroy вернёт false, а причина будет в errors
     if @category.destroy
       redirect_to admin_categories_path, notice: "Категория удалена", status: :see_other
     else

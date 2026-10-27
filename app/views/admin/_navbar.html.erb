@@ -1,4 +1,3 @@
-<%# Меню админки. Не называть menubar: Rails найдёт публичный application/_menubar %>
 <header class="admin-header">
   <nav class="admin-nav">
     <%= link_to "Дашборд", admin_root_path, class: ("active" if controller_name == "dashboard") %>

@@ -1,13 +1,3 @@
-# Посевные данные для показа сервиса «с нуля»:
-#
-#   ADMIN_PASSWORD=придумайте-пароль bin/rails db:reset
-#
-# db:reset пересоздаёт базу по db/schema.rb и запускает этот файл.
-# Данные лежат отдельно от кода:
-#   db/seeds/rubrics.yml, categories.yml, posts.yml — метаданные;
-#   db/seeds/posts/<slug>.md — текст каждого поста в Markdown;
-#   public/autoupload/post_covers — картинки для обложек.
-
 SEEDS_DIR = Rails.root.join("db/seeds")
 COVERS_DIR = Rails.root.join("public/autoupload/post_covers")
 
@@ -65,7 +55,6 @@ def load_seed_file(name)
   YAML.load_file(SEEDS_DIR.join("#{name}.yml"))
 end
 
-# Текст поста лежит отдельно от метаданных. Без него сиды падают, а не пропускают пост
 def read_post_body(slug)
   path = SEEDS_DIR.join("posts", "#{slug}.md")
   raise "Нет текста для поста «#{slug}»: создайте файл db/seeds/posts/#{slug}.md" unless path.exist?

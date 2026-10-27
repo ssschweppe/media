@@ -1,5 +1,4 @@
 class Admin::BaseController < ApplicationController
-  # Все админские контроллеры наследуются отсюда и получают свой layout
   layout "admin"
 
   before_action :authenticate_user!

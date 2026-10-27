@@ -1,5 +1,4 @@
 class Post < ApplicationRecord
-  # Статус в базе и его название в админке
   STATUSES = {
     "draft" => "Черновик",
     "published" => "Опубликован",

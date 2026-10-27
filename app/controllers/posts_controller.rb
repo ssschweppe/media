@@ -4,7 +4,6 @@ class PostsController < ApplicationController
     @posts = Post.published.latest.includes(:rubric, :category)
   end
 
-  # Черновик по прямой ссылке не откроется: find_by! даст 404
   def show
     @post = Post.published.find_by!(slug: params.expect(:slug))
   end
