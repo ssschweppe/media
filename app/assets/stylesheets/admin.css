@@ -220,6 +220,7 @@
 
 .admin .form-field input[type="text"],
 .admin .form-field input[type="email"],
+.admin .form-field input[type="password"],
 .admin .form-field input[type="number"],
 .admin .form-field select,
 .admin .form-field textarea {
@@ -293,4 +294,13 @@
 .admin-body h3 {
   margin: 1.5rem 0 0.5rem;
   font-size: 1rem;
+}
+
+/* Вход и регистрация */
+.admin-logo {
+  font-weight: 700;
+}
+
+.auth-form {
+  max-width: 22rem;
 }

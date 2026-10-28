@@ -1,0 +1,8 @@
+<%# Только ссылки включённых модулей: восстановления пароля и подтверждения почты у нас нет %>
+<% if controller_name != "sessions" %>
+  <p>Уже есть аккаунт? <%= link_to "Войти", new_session_path(resource_name) %></p>
+<% end %>
+
+<% if devise_mapping.registerable? && controller_name != "registrations" %>
+  <p>Нет аккаунта? <%= link_to "Зарегистрироваться", new_registration_path(resource_name) %></p>
+<% end %>
