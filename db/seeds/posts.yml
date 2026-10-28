@@ -3,7 +3,6 @@
 # rubric и category — slug рубрики и категории; category и cover можно не указывать.
 # status: draft, published или archived. Строки с «: » и даты берём в кавычки.
 
-# Черновик: кнопка «Попробовать разбор» на странице «О проекте» появится, когда его опубликуют
 - title: "Что бы мы выкинули: сайт строительной компании"
   slug: stroitelnaya-kompaniya
   rubric: chto-by-my-vykinuli
