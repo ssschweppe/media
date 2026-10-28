@@ -1,9 +1,9 @@
 <%# Layout страниц Devise (вход, регистрация). Rails находит его сам по имени DeviseController.
-    Страницы стандартные, оформление как в админке: body.admin и стили из admin.css %>
+    Оформление как в админке: body.admin и стили из admin.css %>
 <!DOCTYPE html>
 <html lang="ru">
   <head>
-    <title>терракот</title>
+    <title><%= content_for(:title) || "Вход" %> · терракот</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="robots" content="noindex">
     <%= csrf_meta_tags %>
@@ -37,7 +37,7 @@
       <% end %>
     </header>
 
-    <main class="admin-main auth">
+    <main class="admin-main">
       <%= render "flash" %>
       <%= yield %>
     </main>

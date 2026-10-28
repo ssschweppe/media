@@ -220,6 +220,7 @@
 
 .admin .form-field input[type="text"],
 .admin .form-field input[type="email"],
+.admin .form-field input[type="password"],
 .admin .form-field input[type="number"],
 .admin .form-field select,
 .admin .form-field textarea {
@@ -295,86 +296,11 @@
   font-size: 1rem;
 }
 
-/* Вход и регистрация: стандартная разметка Devise в оформлении админки */
+/* Вход и регистрация */
 .admin-logo {
   font-weight: 700;
 }
 
-.auth h2 {
-  margin: 0 0 1rem;
-  font-size: 1.5rem;
-}
-
-.auth form:not(.button_to) {
+.auth-form {
   max-width: 22rem;
-}
-
-.auth .field {
-  margin-bottom: 1.25rem;
-}
-
-.auth .field p {
-  margin: 0 0 0.25rem;
-}
-
-.auth .field label {
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.auth .field em,
-.auth .field i {
-  color: var(--admin-muted);
-  font-size: 12px;
-  font-style: normal;
-}
-
-.auth .field input[type="email"],
-.auth .field input[type="password"] {
-  width: 100%;
-  padding: 0.4rem 0.6rem;
-  border: 1px solid var(--admin-border-strong);
-  border-radius: 4px;
-  background: #ffffff;
-  color: var(--admin-text);
-  font: inherit;
-}
-
-.auth .field input:focus {
-  border-color: var(--admin-text);
-  outline: 1px solid var(--admin-text);
-}
-
-.auth .field .field_with_errors input {
-  border-color: var(--admin-danger);
-}
-
-.auth #error_explanation {
-  margin-bottom: 1.5rem;
-  padding: 0.75rem 1rem;
-  border: 1px solid var(--admin-danger);
-  border-radius: 4px;
-  color: var(--admin-danger);
-}
-
-.auth #error_explanation h2 {
-  margin: 0;
-  font-size: 14px;
-}
-
-.auth #error_explanation ul {
-  margin: 0.5rem 0 0;
-}
-
-/* Кнопка удаления аккаунта — как «Удалить» в админке */
-.auth .button_to button {
-  padding: 0;
-  border: 0;
-  background: none;
-  color: var(--admin-danger);
-  font: inherit;
-  text-decoration: underline;
-  text-decoration-color: var(--admin-border-strong);
-  text-underline-offset: 2px;
-  cursor: pointer;
 }
