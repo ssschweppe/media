@@ -66,7 +66,7 @@ group :test do
 end
 
 gem "devise", "~> 5.0"
-gem "cancancan", "~> 3.6"
+gem "cancancan", "~> 3.7"
 
 gem "carrierwave", "~> 3.1"
 
